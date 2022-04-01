@@ -85,3 +85,4 @@ end
 
 gem 'cssbundling-rails'
 gem 'devise'
+gem 'public_uid'
