@@ -1,16 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Nominomo</title>
+    <title>nominomo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    
+    <%= favicon_link_tag('favicon.ico') %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light fixed-top bg-nomi-header">
+        <div class="container">
+          <%= link_to 'nominomo', root_path, class: 'navbar-brand' %>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <%= link_to 'ログイン', '#', class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ユーザー登録', '#', class: 'nav-link' %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer class="p-3 bg-secondary">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><%= link_to 'Features', '#', class: 'nav-link px-2 text-white' %></li>
+          <li><%= link_to 'Pricing', '#', class: 'nav-link px-2 text-white' %></li>
+          <li><%= link_to 'FAQs', '#', class: 'nav-link px-2 text-white' %></li>
+          <li><%= link_to 'About', '#', class: 'nav-link px-2 text-white' %></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
   </body>
 </html>
