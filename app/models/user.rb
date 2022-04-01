@@ -13,4 +13,7 @@ class User < ApplicationRecord
   def to_param
     uid
   end
+
+  # バリデーション
+  validates :name, presence: true
 end

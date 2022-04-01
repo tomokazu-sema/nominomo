@@ -1,6 +1,6 @@
 <div class="form-main">
   <div class="text-center form-signin">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
       <h1 class="h3 mb-5 fw-normal">ログイン</h1>
 
       <div class="form-floating">
