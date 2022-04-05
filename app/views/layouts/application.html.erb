@@ -14,7 +14,7 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-md navbar-light fixed-top bg-nomi-header">
+      <nav class="navbar navbar-expand-md navbar-light height-nomi-header fixed-top bg-nomi-header">
         <div class="container">
           <%= link_to 'nominomo', root_path, class: 'navbar-brand' %>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,17 +45,17 @@
     <main>
       <%= yield %>
     </main>
-    <footer class="p-3 bg-secondary">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><%= link_to 'Features', '#', class: 'nav-link px-2 text-white' %></li>
-          <li><%= link_to 'Pricing', '#', class: 'nav-link px-2 text-white' %></li>
-          <li><%= link_to 'FAQs', '#', class: 'nav-link px-2 text-white' %></li>
-          <li><%= link_to 'About', '#', class: 'nav-link px-2 text-white' %></li>
-        </ul>
+    <footer class="p-3 height-nomi-footer bg-secondary">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><%= link_to 'Features', '#', class: 'nav-link px-2 text-white' %></li>
+            <li><%= link_to 'Pricing', '#', class: 'nav-link px-2 text-white' %></li>
+            <li><%= link_to 'FAQs', '#', class: 'nav-link px-2 text-white' %></li>
+            <li><%= link_to 'About', '#', class: 'nav-link px-2 text-white' %></li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
   </body>
 </html>
