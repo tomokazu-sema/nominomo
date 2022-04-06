@@ -1,0 +1,24 @@
+<div class="form-main">
+  <div class="text-center form-signin">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
+      <h1 class="h3 mb-5 fw-normal">ログイン</h1>
+
+      <div class="text-danger">
+        <%= flash[:alert] %>
+      </div>
+
+      <div class="form-floating">
+        <%= f.email_field :email, class: 'form-control', placeholder: 'email' %>
+        <%= f.label :email, 'メールアドレス' %>
+      </div>
+      <div class="form-floating">
+        <%= f.password_field :password, class: 'form-control', placeholder: 'password' %>
+        <%= f.label :password, 'パスワード' %>
+      </div>
+
+      <%= f.submit 'ログイン', class: 'w-100 btn btn-lg btn-secondary' %>
+
+      <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+    <% end %>
+  </div>
+</div>

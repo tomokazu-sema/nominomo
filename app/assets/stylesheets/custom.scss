@@ -18,5 +18,12 @@
 /* main //////////////////////////////// */
 
 main {
-  padding-top: 100px; /* header下部の余白を確保 */
+  padding-top: 74px; /* header下部の余白を確保 */
+  min-height: calc(100vh - 60px); /* ページが短くても画面全体に表示 */
+}
+
+/* header //////////////////////////////// */
+
+.height-nomi-footer {
+  height: 60px; /* footerの高さを80pxに固定 */
 }
