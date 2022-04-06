@@ -8,6 +8,6 @@ class UsersController < ApplicationController
   private
 
   def move_to_root
-    redirect_to root_path unless user_signed_in? && current_user.uid == param[:id] 
+    redirect_to root_path unless user_signed_in? && current_user.uid == param[:id]
   end
 end

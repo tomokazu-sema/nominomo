@@ -53,14 +53,14 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   gem 'capistrano'
-  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano3-unicorn'
+  gem 'capistrano-rbenv'
 
-  gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -89,5 +89,5 @@ end
 
 gem 'cssbundling-rails'
 gem 'devise'
-gem 'public_uid'
 gem 'pry-rails'
+gem 'public_uid'

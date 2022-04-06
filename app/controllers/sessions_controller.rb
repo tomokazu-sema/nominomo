@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-# https://github.com/heartcombo/devise/blob/main/app/controllers/devise/sessions_controller.rb
+  # https://github.com/heartcombo/devise/blob/main/app/controllers/devise/sessions_controller.rb
 
   def respond_to_on_destroy
     respond_to do |format|
