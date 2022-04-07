@@ -1,17 +1,21 @@
 <div class="container">
+  <div class="row pt-4 mb-4 pb-2 border-bottom">
+    <div class="col"></div>
+    <div class="col-6">
+      <h1 class="h3 text-center">ユーザー情報編集</h1>
+    </div>
+    <div class="col">
+      <%= button_to "削除", registration_path(resource_name), form: { data: { turbo_confirm: "ユーザーの削除は取り消せません。\n本当に削除しますか？" } }, method: :delete, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { turbo: false }) do |f| %>
-    <div class="row pt-4 mb-4 pb-2 border-bottom">
-      <div class="col"></div>
-      <div class="col-6">
-        <h1 class="h3 text-center">ユーザー情報編集</h1>
-      </div>
-      <div class="col">
-        <%= button_to "削除", registration_path(resource_name), form: { data: { turbo_confirm: "ユーザーの削除は取り消せません。\n本当に削除しますか？" } }, method: :delete, class: 'btn btn-secondary' %>
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= render "shared/error_messages", resource: resource %>
       </div>
     </div>
-    
-    <%= render "shared/error_messages", resource: resource %>
-    
+
     <div class="row mb-2 pb-4 justify-content-center">
       <div class="col-4 nomi-form-width">
         <%= f.label :name, 'ユーザー名' %>
