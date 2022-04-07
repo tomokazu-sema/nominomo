@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_07_082034) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_07_055354) do
   create_table "event_hosts", charset: "utf8", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.string "uid", null: false
