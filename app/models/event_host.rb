@@ -1,0 +1,2 @@
+class EventHost < ApplicationRecord
+end
