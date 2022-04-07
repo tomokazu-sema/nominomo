@@ -16,4 +16,7 @@ class User < ApplicationRecord
 
   # バリデーション
   validates :name, presence: true
+
+  # アソシエーション
+  has_many :events
 end

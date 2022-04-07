@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   has_secure_password
-  
+
   # ランダム文字列をuidカラムに格納
   uid_length = 32
   uid_ranges   = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
@@ -13,4 +13,7 @@ class Event < ApplicationRecord
 
   # バリデーション
   validates :title, presence: true
+
+  # アソシエーション
+  belongs_to :user
 end
