@@ -4,5 +4,21 @@ class EventsController < ApplicationController
   end
 
   def create
+    @event = Event.new(event_params)
+    if @event.valid?
+      @event.save
+      EventHost.create(event_id: @event.id)
+      redirect_to "/events/#{@event.uid}/event_hosts/#{@event.event_host.uid}/info"
+    else
+      render :new, status: :unprocessable_entity 
+    end
+  end
+
+  private
+
+  def event_params
+    form_params = params.require(:event).permit(:title, :password)
+    form_params = form_params.merge(user_id: current_user.id) if user_signed_in?
+    return form_params
   end
 end
