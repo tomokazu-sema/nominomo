@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_07_055354) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_07_082034) do
   create_table "event_hosts", charset: "utf8", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.string "uid", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_07_055354) do
     t.bigint "user_id"
     t.string "uid", null: false
     t.string "title", null: false
-    t.string "encrypted_password"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uid"], name: "index_events_on_uid", unique: true
