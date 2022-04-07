@@ -1,2 +1,29 @@
-<h1>Events#new</h1>
-<p>Find me in app/views/events/new.html.erb</p>
+<div class="container">
+  <%= form_with model:@event do |f| %>
+    <div class="row pt-4 mb-4 pb-2 border-bottom">
+      <h1 class="h3 text-center">日程調整の作成</h1>
+    </div>
+    
+    <%= render "shared/error_messages", resource: f.object %>
+    
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :title, 'イベント名' %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+    </div>
+    
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :password, '閲覧パスワード (希望する場合のみ入力)' %>
+        <%= f.text_field :password, class: 'form-control' %>
+      </div>
+    </div>
+    
+    <div class="row mb-4 pb-2 justify-content-center">
+      <div class="col-2 nomi-form-btn-width">
+        <%= f.submit '作成', class: 'w-100 btn btn-lg btn-secondary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

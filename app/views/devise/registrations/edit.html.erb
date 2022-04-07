@@ -1,47 +1,62 @@
 <div class="container">
-  <div class="row pt-3 pb-4 border-bottom">
-    <div class="col"></div>
-    <div class="col">
-      <h1 class="h3 my-auto fw-normal text-center">ユーザー情報編集</h1>
-    </div>
-    <div class="col d-flex align-items-center">
-      <%= button_to "削除", registration_path(resource_name), form: { data: { turbo_confirm: "ユーザーの削除は取り消せません。\n本当に削除しますか？" } }, method: :delete, class: 'btn btn-secondary' %> 
-    </div>
-  </div>
-</div>
-
-<div class="form-main mt-0">
-      <div class="text-center form-signup">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { turbo: false }) do |f| %>
-
-          <%= render "shared/error_messages", resource: resource %>
-          
-          <div class="mb-4 pb-2 border-bottom">
-            <%= f.label :name, 'ユーザー名' %>
-            <%= f.text_field :name, class: 'form-control' %>
-          </div>
-
-          <div class="mb-4 pb-2 border-bottom">
-            <%= f.label :email, 'メールアドレス' %>
-            <%= f.email_field :email, class: 'form-control' %>
-          </div>
-          
-          <div class="mb-4 pb-2 border-bottom">
-            <%= f.label :password, '新しいパスワード' %>
-            <% if @minimum_password_length %>
-              <%= "(#{@minimum_password_length}文字以上)" %>
-            <% end %>
-            <%= f.password_field :password, class: 'form-control', placeholder: 'パスワードを変更する' %>
-
-            <%= f.label :password_confirmation, '新しいパスワード (再入力)' %><br />
-            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'パスワードを変更する(再入力)' %>
-          </div>
-
-          <%= f.label :current_password, '現在のパスワード' %><br />
-          <%= f.password_field :current_password, class: 'form-control mb-2' %>
-
-          <%= f.submit '更新', class: 'w-100 btn btn-lg btn-secondary mb-5' %>
-          <%= link_to 'もどる', user_path(@user), class: 'btn btn-secondary' %>
-        <% end %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { turbo: false }) do |f| %>
+    <div class="row pt-4 mb-4 pb-2 border-bottom">
+      <div class="col"></div>
+      <div class="col-6">
+        <h1 class="h3 text-center">ユーザー情報編集</h1>
+      </div>
+      <div class="col">
+        <%= button_to "削除", registration_path(resource_name), form: { data: { turbo_confirm: "ユーザーの削除は取り消せません。\n本当に削除しますか？" } }, method: :delete, class: 'btn btn-secondary' %>
       </div>
     </div>
+    
+    <%= render "shared/error_messages", resource: resource %>
+    
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :name, 'ユーザー名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+    
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :email, 'メールアドレス' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :password, '新しいパスワード' %>
+        <% if @minimum_password_length %>
+          <%= "(#{@minimum_password_length}文字以上)" %>
+        <% end %>
+        <%= f.password_field :password, class: 'form-control', placeholder: 'パスワードを変更する' %>
+
+        <%= f.label :password_confirmation, '新しいパスワード (再入力)' %><br />
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'パスワードを変更する(再入力)' %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :current_password, '現在のパスワード' %><br />
+        <%= f.password_field :current_password, class: 'form-control mb-2' %>
+      </div>
+    </div>
+    
+    <div class="row mb-4 pb-2 justify-content-center">
+      <div class="col-2 nomi-form-btn-width">
+        <%= f.submit '更新', class: 'w-100 btn btn-lg btn-secondary' %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row pt-2 mb-4 pb-2 justify-content-center">
+    <div class="col-2 nomi-form-btn-width">
+      <%= link_to 'もどる', user_path(@user), class: 'w-100 btn btn-secondary' %>
+    </div>
+  </div>
+  
+</div>
