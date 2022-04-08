@@ -7,8 +7,8 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     if @event.valid?
       @event.save
-      EventHost.create(event_id: @event.id)
-      redirect_to "/events/#{@event.uid}/event_hosts/#{@event.event_host.uid}/info"
+      Host.create(event_id: @event.id)
+      redirect_to "/events/#{@event.uid}/hosts/#{@event.host.uid}/info"
     else
       render :new, status: :unprocessable_entity 
     end

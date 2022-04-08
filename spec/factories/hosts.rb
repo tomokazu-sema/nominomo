@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :event_host do
+  factory :host do
     
   end
 end

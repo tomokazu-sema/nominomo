@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_07_055354) do
-  create_table "event_hosts", charset: "utf8", force: :cascade do |t|
-    t.bigint "event_id", null: false
-    t.string "uid", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_event_hosts_on_event_id"
-    t.index ["uid"], name: "index_event_hosts_on_uid", unique: true
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2022_04_08_025954) do
   create_table "events", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.string "uid", null: false
@@ -29,6 +20,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_07_055354) do
     t.datetime "updated_at", null: false
     t.index ["uid"], name: "index_events_on_uid", unique: true
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "hosts", charset: "utf8", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "uid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_hosts_on_event_id"
+    t.index ["uid"], name: "index_hosts_on_uid", unique: true
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -46,6 +46,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_07_055354) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
-  add_foreign_key "event_hosts", "events"
   add_foreign_key "events", "users"
+  add_foreign_key "hosts", "events"
 end

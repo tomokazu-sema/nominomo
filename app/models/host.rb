@@ -1,4 +1,4 @@
-class EventHost < ApplicationRecord
+class Host < ApplicationRecord
   # ランダム文字列をuidカラムに格納
   uid_length = 32
   uid_ranges   = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root to: 'pages#index'
   resources :users, only: :show
   resources :events, only: [:new, :create] do
-    resources :events_hosts, only: :show
-    get '/event_hosts/:id/info', to: "event_hosts#info"
+    resources :hosts, only: :show
+    get '/hosts/:id/info', to: "hosts#info"
   end
 end
