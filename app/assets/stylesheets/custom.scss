@@ -1,8 +1,9 @@
 
 /* color //////////////////////////////// */
 
+$nomi-yellow: #fff33f;
 .bg-nomi-header {
-  background-color: #fff33f;
+  background-color: $nomi-yellow;
 }
 
 .bg-nomi-main {
@@ -35,4 +36,24 @@ main {
 
 .nomi-form-btn-width {
   min-width: 180px;
+}
+
+/* event //////////////////////////////// */
+.nomi-event-width {
+  min-width: 360px;
+}
+
+.nomi-overflow-x {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.nomi-subhead {
+  height: 36px;
+}
+
+.nomi-subhead-box {
+  height: 100%;
+  width: 18px;
+  background-color: $nomi-yellow;
 }
