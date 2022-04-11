@@ -18,9 +18,12 @@
     <div class="row mb-2 pb-2 justify-content-center">
       <div class="col-6 nomi-event-width">
         コピーして参加者に送りましょう
-        <p class="nomi-overflow-x">
-          <%= "http://#{request.domain}/events/#{@event.uid}" %>
-        </p>
+        <div class="d-flex">
+          <input class="btn btn-secondary" type="button" value="コピー" id="copy_btn_guest">
+          <p class="ms-2 nomi-overflow-x" id="url_guest">
+            <%= "http://#{request.domain}/events/#{@event.uid}" %>
+          </p>
+        </div>
       </div>
     </div>
 
