@@ -1,8 +1,9 @@
 
 /* color //////////////////////////////// */
 
+$nomi-yellow: #fff33f;
 .bg-nomi-header {
-  background-color: #fff33f;
+  background-color: $nomi-yellow;
 }
 
 .bg-nomi-main {
@@ -26,4 +27,43 @@ main {
 
 .height-nomi-footer {
   height: 60px; /* footerの高さを80pxに固定 */
+}
+
+/* form //////////////////////////////// */
+.nomi-form-width {
+  min-width: 360px;
+}
+
+.nomi-form-btn-width {
+  min-width: 180px;
+}
+
+/* host //////////////////////////////// */
+
+.nomi-copy-btn {
+  font-size: 30px;
+}
+
+.nomi-copy-btn:active {
+  color: lightgray;
+}
+
+.nomi-overflow-x {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* event //////////////////////////////// */
+.nomi-event-width {
+  min-width: 360px;
+}
+
+.nomi-subhead {
+  height: 36px;
+}
+
+.nomi-subhead-box {
+  height: 100%;
+  width: 18px;
+  background-color: $nomi-yellow;
 }

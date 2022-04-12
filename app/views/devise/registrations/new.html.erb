@@ -1,28 +1,46 @@
-<div class="form-main">
-  <div class="text-center form-signup">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
-      <h1 class="h3 mb-5 fw-normal">ユーザー登録</h1>
-
-      <%= render "shared/error_messages", resource: resource %>
-      
-      <%= f.label :name, 'ユーザー名' %>
-      <%= f.text_field :name, class: 'form-control' %>
-
-      <%= f.label :email, 'メールアドレス' %>
-      <%= f.email_field :email, class: 'form-control' %>
-        
-      <%= f.label :password, 'パスワード' %>
-      <% if @minimum_password_length %>
-        <%= "(#{@minimum_password_length}文字以上)" %>
-      <% end %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :password_confirmation, 'パスワード (確認)' %><br />
-      <%= f.password_field :password_confirmation, class: 'form-control mb-5' %>
-
-      <%= f.submit '登録', class: 'w-100 btn btn-lg btn-secondary' %>
-
-      <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
-    <% end %>
+<div class="container">
+  <div class="row pt-4 mb-4 pb-2 border-bottom">
+    <h1 class="h3 text-center">ユーザー登録</h1>
   </div>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= render "shared/error_messages", resource: resource %>
+      </div>
+    </div>
+    
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :name, 'ユーザー名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+    
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :email, 'メールアドレス' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :password, 'パスワード' %>
+        <% if @minimum_password_length %>
+          <%= "(#{@minimum_password_length}文字以上)" %>
+        <% end %>
+        <%= f.password_field :password, class: 'form-control' %>
+
+        <%= f.label :password_confirmation, 'パスワード (再入力)' %><br />
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+    </div>
+    
+    <div class="row mb-4 pb-2 justify-content-center">
+      <div class="col-2 nomi-form-btn-width">
+        <%= f.submit '登録', class: 'w-100 btn btn-lg btn-secondary' %>
+      </div>
+    </div>
+  <% end %>
 </div>

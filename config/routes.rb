@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   root to: 'pages#index'
   resources :users, only: :show
+  resources :events, only: %i[new create show] do
+    resources :hosts, only: :show
+    get '/hosts/:id/info', to: 'hosts#info'
+  end
 end
