@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :new_guest, :create_guest]
+  before_action :set_event, only: %i[show new_guest create_guest]
 
   def new
     @event = Event.new
@@ -20,8 +20,7 @@ class EventsController < ApplicationController
     move_to_new_guest if @event.password_digest
   end
 
-  def new_guest
-  end
+  def new_guest; end
 
   def create_guest
     password = params[:password]
@@ -69,11 +68,13 @@ class EventsController < ApplicationController
     # 主催者用cookieを持っていればパスワード画面に遷移しない
     event_host_ids = cookies.signed[:host]
     return if event_host_ids && event_host_ids.include?(@event.id)
+
     # 参加者用cookieを持っていればパスワード画面に遷移しない
     event_guest_ids = cookies.signed[:guest]
     return if event_guest_ids && event_guest_ids.include?(@event.id)
     # 作成したユーザーであればパスワード画面に遷移しない
     return if user_signed_in? && @event.user && current_user.id = @event.user_id
+
     # 上記を満たさない場合パスワード画面に遷移する
     redirect_to "/events/#{@event.uid}/sign_in"
   end
