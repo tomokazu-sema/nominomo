@@ -2,8 +2,7 @@ class HostsController < ApplicationController
   before_action :set_event
   before_action :set_host_cookie
 
-  def info
-  end
+  def info; end
 
   def show
     redirect_to event_path(@event)
@@ -23,7 +22,7 @@ class HostsController < ApplicationController
       # cookieから存在しないeventを取り除く
       ids = []
       event_ids.each do |id|
-        ids << id if Event.find_by(id: id) && id != @event.id
+        ids << id if Event.find_by(id:) && id != @event.id
       end
       # 作成したeventを加えたcookieを渡す
       ids << @event.id
