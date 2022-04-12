@@ -1,13 +1,19 @@
 class HostsController < ApplicationController
+  before_action :set_event
+  before_action :set_host_cookie
+
   def info
-    @event = Event.find_by(uid: params[:event_id])
-    set_host_cookie
   end
 
   def show
+    redirect_to event_path(@event)
   end
 
   private
+
+  def set_event
+    @event = Event.find_by(uid: params[:event_id])
+  end
 
   def set_host_cookie
     # cookieを取得
