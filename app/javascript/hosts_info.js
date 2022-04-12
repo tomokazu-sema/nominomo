@@ -1,34 +1,28 @@
 // 要改修 2022.04.12 t.sema
-// 重複部をfunctionにまとめるとwriteTextのpermissionを要求される
-// firefoxがPermission APIに対応していない
+// http環境ではclipboard APIが使えない
+// やむなくexecCommandを使用する
+
 
 function copyUrl () {
   const copyBtnGuest = document.getElementById("copy_btn_guest");
   const copyBtnHost  = document.getElementById("copy_btn_host");
-  copyBtnGuest.addEventListener('click', () => {
-    const url = document.getElementById('url_guest');
-    const urlText = url.textContent.trim();
-    // ブラウザがClipboard APIに対応しているか判定
-    if (navigator.clipboard != undefined) {
-      // 対応している場合
-      navigator.clipboard.writeText(urlText);
-    } else {
-      // 対応していない場合(IE)
-      window.clipboardData.setData('Text', urlText);
-    }
-  });
-  copyBtnHost.addEventListener('click', () => {
-    const url = document.getElementById('url_host');
-    const urlText = url.textContent.trim();
-    // ブラウザがClipboard APIに対応しているか判定
-    if (navigator.clipboard != undefined) {
-      // 対応している場合
-      navigator.clipboard.writeText(urlText);
-    } else {
-      // 対応していない場合(IE)
-      window.clipboardData.setData('Text', urlText);
-    }
-  });
+  copyBtnGuest.addEventListener('click', () => { copyUrlToClipboard('url_guest') });
+  copyBtnHost.addEventListener('click', () => { copyUrlToClipboard('url_host') });
 }
 
-window.addEventListener('load', copyUrl());
+function copyUrlToClipboard(copyBtnId) {
+  const url = document.getElementById(copyBtnId);
+  const range = document.createRange();
+  range.selectNodeContents(url);
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
+  
+  if(document.execCommand('copy')) {
+    selection.removeAllRanges();
+  } else {
+    alert('コピーに失敗しました。\nCtrl+Cを押してコピーをお願いします.');
+  }
+}
+
+window.addEventListener('load', copyUrl);
