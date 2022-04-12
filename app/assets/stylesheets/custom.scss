@@ -38,14 +38,24 @@ main {
   min-width: 180px;
 }
 
-/* event //////////////////////////////// */
-.nomi-event-width {
-  min-width: 360px;
+/* host //////////////////////////////// */
+
+.nomi-copy-btn {
+  font-size: 30px;
+}
+
+.nomi-copy-btn:active {
+  color: lightgray;
 }
 
 .nomi-overflow-x {
-  overflow-x: scroll;
+  overflow-x: auto;
   white-space: nowrap;
+}
+
+/* event //////////////////////////////// */
+.nomi-event-width {
+  min-width: 360px;
 }
 
 .nomi-subhead {

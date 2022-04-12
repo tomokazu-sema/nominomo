@@ -15,12 +15,12 @@
       </div>
     </div>
 
-    <div class="row mb-2 pb-2 justify-content-center">
+    <div class="row mb-2 py-2 justify-content-center">
       <div class="col-6 nomi-event-width">
         コピーして参加者に送りましょう
-        <div class="d-flex">
-          <input class="btn btn-secondary" type="button" value="コピー" id="copy_btn_guest">
-          <p class="ms-2 nomi-overflow-x" id="url_guest">
+        <div class="mt-2 d-flex align-items-center">
+          <span class="bi bi-files nomi-copy-btn" type="button" id="copy_btn_guest"></span>
+          <p class="ms-3 mb-0 nomi-overflow-x" id="url_guest">
             <%= "http://#{request.domain}/events/#{@event.uid}" %>
           </p>
         </div>
@@ -42,15 +42,17 @@
       </div>
     </div>
 
-    <div class="row mb-2 pb-2 justify-content-center">
+
+    <div class="row mb-2 py-2 justify-content-center">
       <div class="col-6 nomi-event-width">
-        コピーして主催者に送りましょう
-        <p class="nomi-overflow-x">
-          <%= "http://#{request.domain}/events/#{@event.uid}/hosts/#{@event.host.uid}/info" %>
-        </p>
+        コピーして他の主催者に送りましょう
+        <div class="mt-2 d-flex align-items-center">
+          <span class="bi bi-files nomi-copy-btn" type="button" id="copy_btn_host"></span>
+          <p class="ms-3 mb-0 nomi-overflow-x" id="url_host">
+            <%= "http://#{request.domain}/events/#{@event.uid}/hosts/#{@event.host.uid}" %>
+          </p>
+        </div>
       </div>
     </div>
   </div>
-  
-  
 </div>
