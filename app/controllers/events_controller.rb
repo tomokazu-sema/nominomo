@@ -29,7 +29,7 @@ class EventsController < ApplicationController
       redirect_to event_path(@event)
     else
       flash.now[:alert] = '閲覧パスワードを入力してください'
-      render :new_guest
+      render :new_guest, status: :unprocessable_entity
     end
   end
 
