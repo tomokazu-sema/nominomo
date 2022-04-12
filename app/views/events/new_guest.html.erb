@@ -1,0 +1,26 @@
+<div class="container">
+  <%= form_with url: "/events/#{@event.uid}/sign_in", method: :post do |f| %>
+    <div class="row pt-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <ul>
+          <% if flash[:alert] %>
+          <li class="text-danger"><%= flash[:alert] %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="row mb-0 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <%= f.label :password, '閲覧パスワード' %>
+        <%= f.text_field :password, class: 'form-control' %>
+      </div>
+    </div>
+    
+    <div class="row mb-4 pb-2 justify-content-center">
+      <div class="col-1 nomi-form-btn-width">
+        <%= f.submit '送信', class: 'w-100 btn btn-secondary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
