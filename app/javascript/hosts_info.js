@@ -31,6 +31,4 @@ function copyUrl () {
   });
 }
 
-if (document.URL.match(/\/hosts\/.*\/info/)) {
-  window.addEventListener('load', copyUrl());
-}
+window.addEventListener('load', copyUrl());
