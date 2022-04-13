@@ -1,6 +1,6 @@
 class HostsController < ApplicationController
   before_action :set_event
-  before_action :set_host_cookie
+  before_action :set_event_host_cookie
 
   def info; end
 
@@ -14,7 +14,7 @@ class HostsController < ApplicationController
     @event = Event.find_by(uid: params[:event_id])
   end
 
-  def set_host_cookie
-    set_cookie(:host)
+  def set_event_host_cookie
+    set_event_cookie(:host)
   end
 end
