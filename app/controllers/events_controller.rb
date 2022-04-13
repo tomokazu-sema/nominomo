@@ -54,7 +54,7 @@ class EventsController < ApplicationController
     event_guest_ids = cookies.signed[:guest]
     return if event_guest_ids && event_guest_ids.include?(@event.id)
     # 作成したユーザーであればパスワード画面に遷移しない
-    return if user_signed_in? && @event.user && current_user.id = @event.user_id
+    return if user_signed_in? && @event.user && current_user.id == @event.user_id
 
     # 上記を満たさない場合パスワード画面に遷移する
     redirect_to "/events/#{@event.uid}/sign_in"
