@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   def create_guest
     password = params[:password]
     if @event.authenticate(password)
-      set_guest_cookie
+      set_cookie(:guest)
       redirect_to event_path(@event)
     else
       flash.now[:alert] = '閲覧パスワードを入力してください'
@@ -42,26 +42,7 @@ class EventsController < ApplicationController
   def event_params
     form_params = params.require(:event).permit(:title, :password)
     form_params = form_params.merge(user_id: current_user.id) if user_signed_in?
-  end
-
-  def set_guest_cookie
-    # cookieを取得
-    event_ids = cookies.signed[:guest]
-    if event_ids
-      # cookieを既に持っている場合
-      # cookieから存在しないeventを取り除く
-      ids = []
-      event_ids.each do |id|
-        ids << id if Event.find_by(id:) && id != @event.id
-      end
-      # 作成したeventを加えたcookieを渡す
-      ids << @event.id
-      cookies.signed[:guest] = { value: ids, expires: 1.year.from_now }
-    else
-      # cookieを持っていない場合
-      # 作成したeventのcookieを渡す
-      cookies.signed[:guest] = { value: [@event.id], expires: 1.year.from_now }
-    end
+    form_params
   end
 
   def move_to_new_guest
