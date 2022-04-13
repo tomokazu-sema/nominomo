@@ -25,4 +25,11 @@ function copyUrlToClipboard(copyBtnId) {
   }
 }
 
-window.addEventListener('load', copyUrl);
+// ブラウザ別動作対応
+const agent = window.navigator.userAgent.toLowerCase()
+if (agent.indexOf('firefox') != -1) {
+  // firefoxの場合
+  copyUrl();
+} else {
+  window.addEventListener('load', copyUrl);
+}
