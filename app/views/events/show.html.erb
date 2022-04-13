@@ -1,1 +1,16 @@
-events/show
+<% content_for :head do %>
+  <%= javascript_import_module_tag "events_show" %>
+<% end %>
+
+<div class="container">
+  <div class="row pt-3 mb-4 pb-4 border-bottom">
+    <div class="col"></div>
+    <h1 class="col text-center"><%= @event.title %></h1>
+    <div class="col d-flex justify-content-end align-items-center">
+      <% if host_user?(@event) %>
+        <button class="me-2 btn btn-secondary", id="edit_title">編集</button>
+        <button class="me-2 btn btn-secondary", id="delete_title">削除</button>
+      <% end %>
+    </div>
+  </div>
+</div>
