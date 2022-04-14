@@ -1,13 +1,13 @@
 class EventsController < ApplicationController
   include EventsHelper
-  before_action :set_event, only: %i[show new_guest create_guest]
+  before_action :set_event, only: %i[show new_guest create_guest update]
 
   def new
     @event = Event.new
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(event_params_new)
     if @event.valid?
       @event.save
       Host.create(event_id: @event.id)
@@ -19,6 +19,14 @@ class EventsController < ApplicationController
 
   def show
     move_to_new_guest if @event.password_digest
+  end
+
+  def update
+    if @event.update(event_params_update)
+      redirect_to event_path(@event)
+    else
+      render :show, status: :unprocessable_entity
+    end
   end
 
   def new_guest; end
@@ -40,10 +48,14 @@ class EventsController < ApplicationController
     @event = Event.find_by(uid: params[:id])
   end
 
-  def event_params
+  def event_params_new
     form_params = params.require(:event).permit(:title, :password)
     form_params = form_params.merge(user_id: current_user.id) if user_signed_in?
     form_params
+  end
+    
+  def event_params_update
+    params.require(:event).permit(:title)
   end
 
   def move_to_new_guest
