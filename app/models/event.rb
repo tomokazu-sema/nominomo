@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_secure_password
+  has_secure_password(validations: false)
 
   # ランダム文字列をuidカラムに格納
   uid_length = 32
