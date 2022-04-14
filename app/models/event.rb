@@ -16,5 +16,5 @@ class Event < ApplicationRecord
 
   # アソシエーション
   belongs_to :user, optional: true
-  has_one :host
+  has_one :host, dependent: :destroy
 end

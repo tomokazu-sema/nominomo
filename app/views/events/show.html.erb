@@ -1,1 +1,37 @@
-events/show
+<% content_for :head do %>
+  <%= javascript_import_module_tag "events_show" %>
+<% end %>
+
+<div class="container">
+  <div class="row pt-3 mb-4 pb-4 border-bottom">
+    <div class="col"></div>
+    <h1 class="col text-center" id="title"><%= Event.find(@event.id).title %></h1>
+    <div class="col d-flex justify-content-end align-items-center">
+      <% if host_user?(@event) %>
+        <span class="me-2 btn btn-secondary", id="open_edit_title">編集</span>
+        <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "の削除は取り消せません。\n本当に削除しますか？" } }, class: 'me-2 btn btn-secondary' %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= form_with model:@event, data: { turbo_method: :patch }, class: 'visually-hidden py-4 bg-nomi-main', id: 'form_edit_title' do |f| %>
+    <div class="row mb-2 pb-4 justify-content-center">
+      <div class="col-4 nomi-form-width">
+        <p class="mb-0 text-danger" id="notice_edit_title"></p>
+        <%= f.label :title, 'イベント名' %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+    </div>
+    
+    <div class="row mb-4 justify-content-center">
+      <div class="col-2 nomi-form-btn-width">
+        <%= f.submit '更新', class: 'w-100 btn btn-lg btn-secondary', id: 'submit_edit_title' %>
+      </div>
+    </div>
+    <div class="row mb-4 pb-2 justify-content-center">
+      <div class="col-2 d-flex justify-content-center nomi-form-btn-width">
+        <span class="me-2 btn btn-secondary", id="close_edit_title">閉じる</span>
+      </div>
+    </div>
+  <% end %>
+</div>

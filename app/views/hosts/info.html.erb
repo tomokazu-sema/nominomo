@@ -33,7 +33,7 @@
 
     <div class="row mb-2 pb-2 justify-content-center">
       <div class="col-6 nomi-event-width">
-        <%= link_to 'イベントページへ行く', event_path(@event), class: 'w-100 btn btn-lg btn-secondary' %>
+        <%= link_to 'イベントページへ行く', event_path(@event), data: { turbo: false },class: 'w-100 btn btn-lg btn-secondary' %>
       </div>
     </div>
   </div>

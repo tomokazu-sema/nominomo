@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   # cookieを渡す
-  def set_cookie(key)
+  def set_event_cookie(key)
     # cookieを取得
     event_ids = cookies.signed[key]
     if event_ids
