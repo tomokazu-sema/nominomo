@@ -24,12 +24,12 @@ class EventsController < ApplicationController
   def update
     message = ''
     message = 'イベント名を入力してください' unless @event.update(event_params_update)
-    render json:{ item: @event, message: message }
+    render json: { item: @event, message: }
   end
 
   def destroy
     Event.find_by(uid: params[:id]).destroy
-    redirect_to root_path, status: :see_other 
+    redirect_to root_path, status: :see_other
   end
 
   def new_guest; end
