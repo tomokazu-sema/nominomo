@@ -3,7 +3,7 @@
     <h1 class="h3 text-center">日程調整の作成</h1>
   </div>
 
-  <%= form_with model:@event, data: { turbo_method: :post } do |f| %>
+  <%= form_with model:@event, data: { turbo: :false, turbo_method: :post } do |f| %>
     <div class="row mb-2 pb-4 justify-content-center">
       <div class="col-4 nomi-form-width">
         <%= render "shared/error_messages", resource: f.object %>

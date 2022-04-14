@@ -1,5 +1,5 @@
 <div class="container">
-  <%= form_with url: "/events/#{@event.uid}/sign_in", data: { turbo_method: :post } do |f| %>
+  <%= form_with url: "/events/#{@event.uid}/sign_in", data: { turbo: false, turbo_method: :post } do |f| %>
     <div class="row pt-4 justify-content-center">
       <div class="col-4 nomi-form-width">
         <ul>
