@@ -9,7 +9,7 @@
     <div class="col d-flex justify-content-end align-items-center">
       <% if host_user?(@event) %>
         <span class="me-2 btn btn-secondary", id="open_edit_title">編集</span>
-        <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "の削除は取り消せません。\n本当に削除しますか？" } }, class: 'me-2 btn btn-secondary' %>
+        <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "日程調整の削除は取り消せません。\n本当に削除しますか？" } }, class: 'me-2 btn btn-secondary' %>
       <% end %>
     </div>
   </div>
