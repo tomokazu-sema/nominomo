@@ -22,11 +22,9 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.update(event_params_update)
-      redirect_to event_path(@event)
-    else
-      render :show, status: :unprocessable_entity
-    end
+    message = ''
+    message = 'イベント名を入力してください' unless @event.update(event_params_update)
+    render json:{ item: @event, message: message }
   end
 
   def new_guest; end
@@ -53,7 +51,7 @@ class EventsController < ApplicationController
     form_params = form_params.merge(user_id: current_user.id) if user_signed_in?
     form_params
   end
-    
+
   def event_params_update
     params.require(:event).permit(:title)
   end

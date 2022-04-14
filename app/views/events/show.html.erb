@@ -5,24 +5,19 @@
 <div class="container">
   <div class="row pt-3 mb-4 pb-4 border-bottom">
     <div class="col"></div>
-    <h1 class="col text-center"><%= Event.find(@event.id).title %></h1>
+    <h1 class="col text-center" id="title"><%= Event.find(@event.id).title %></h1>
     <div class="col d-flex justify-content-end align-items-center">
       <% if host_user?(@event) %>
-        <button class="me-2 btn btn-secondary", id="edit_title">編集</button>
+        <button class="me-2 btn btn-secondary", id="open_edit_title">編集</button>
         <button class="me-2 btn btn-secondary", id="delete_title">削除</button>
       <% end %>
     </div>
   </div>
 
-  <%= form_with model:@event, data: { turbo_method: :patch }, class: 'visually-hidden', id: 'form_title' do |f| %>
+  <%= form_with model:@event, data: { turbo_method: :patch }, class: 'visually-hidden', id: 'form_edit_title' do |f| %>
     <div class="row mb-2 pb-4 justify-content-center">
       <div class="col-4 nomi-form-width">
-        <%= render "shared/error_messages", resource: f.object %>
-      </div>
-    </div>
-
-    <div class="row mb-2 pb-4 justify-content-center">
-      <div class="col-4 nomi-form-width">
+        <p class="mb-0 text-danger" id="notice_edit_title"></p>
         <%= f.label :title, 'イベント名' %>
         <%= f.text_field :title, class: 'form-control' %>
       </div>
@@ -30,7 +25,7 @@
     
     <div class="row mb-4 pb-4 justify-content-center">
       <div class="col-2 nomi-form-btn-width">
-        <%= f.submit '更新', class: 'w-100 btn btn-lg btn-secondary' %>
+        <%= f.submit '更新', class: 'w-100 btn btn-lg btn-secondary', id: 'submit_edit_title' %>
       </div>
     </div>
   <% end %>
