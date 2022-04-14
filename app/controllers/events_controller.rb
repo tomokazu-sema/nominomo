@@ -27,6 +27,11 @@ class EventsController < ApplicationController
     render json:{ item: @event, message: message }
   end
 
+  def destroy
+    Event.find_by(uid: params[:id]).destroy
+    redirect_to root_path, status: :see_other 
+  end
+
   def new_guest; end
 
   def create_guest

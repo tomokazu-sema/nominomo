@@ -18,5 +18,5 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   # アソシエーション
-  has_many :events
+  has_many :events, dependent: :destroy
 end
