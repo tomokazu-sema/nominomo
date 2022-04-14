@@ -5,6 +5,7 @@ const classUnhidden = 'mt-0';
 const titleId = 'title';
 
 const openEditTitleId   = 'open_edit_title';
+const closeEditTitleId  = 'close_edit_title';
 const formEditTitleId   = 'form_edit_title';
 const submitEditTitleId = 'submit_edit_title';
 const noticeEditTitleId = 'notice_edit_title';
@@ -12,21 +13,23 @@ const noticeEditTitleId = 'notice_edit_title';
 function formMain() {
   // イベント名の編集
   const openEditTitle   = document.getElementById(openEditTitleId);
+  const closeEditTitle  = document.getElementById(closeEditTitleId);
   const formEditTitle   = document.getElementById(formEditTitleId);
   const submitEditTitle = document.getElementById(submitEditTitleId);
-  let flagEditTitle = false;
-  openEditTitle.addEventListener('click', () => { flagEditTitle = formOpen(formEditTitle, flagEditTitle) });
+  let flagOpenEditTitle = false;
+  openEditTitle.addEventListener('click', () => { flagOpenEditTitle = formOpen(formEditTitle.classList, flagOpenEditTitle) });
+  closeEditTitle.addEventListener('click', () => { flagOpenEditTitle = formClose(formEditTitle.classList, flagOpenEditTitle) });
   submitEditTitle.addEventListener('click', (e) => { submitForm(e, formEditTitle) });
 }
 
-function formOpen(form, flag) {
-  const formClass = form.classList;
-  if (flag) {
-    formClass.replace(classUnhidden, classHidden);
-  } else {
-    formClass.replace(classHidden, classUnhidden);
-  }
-  return !flag;
+function formOpen(formClass, flag) {
+  if (!flag) formClass.replace(classHidden, classUnhidden);
+  return true;
+}
+
+function formClose(formClass, flag) {
+  if (flag) formClass.replace(classUnhidden, classHidden);
+  return false;
 }
 
 function submitForm(e, form) {
