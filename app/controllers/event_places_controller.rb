@@ -1,0 +1,2 @@
+class EventPlacesController < ApplicationController
+end
