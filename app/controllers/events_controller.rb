@@ -22,9 +22,12 @@ class EventsController < ApplicationController
   end
 
   def update
-    message = ''
-    message = 'イベント名を入力してください' unless @event.update(event_params_update)
-    render json: { item: @event, message: }
+    if @event.update(event_params_update)
+      messages = []
+    else
+      messages = @event.errors.full_messages
+    end
+    render json: { model: @event, messages: messages }
   end
 
   def destroy
