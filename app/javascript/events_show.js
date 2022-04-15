@@ -1,5 +1,8 @@
 import Form from './form.js'
 
+const classHidden   = 'visually-hidden';
+const classUnhidden = 'nomi-dmy';
+
 // イベント名の編集
 const formTitleId        = 'form_title';
 const openFormTitleId    = 'open_form_title';
@@ -16,7 +19,15 @@ const closeFormPlaceId   = 'close_form_place';
 const submitFormPlaceId  = 'submit_form_place'; 
 const messageFormPlaceId = 'message_form_place';
 
+const placeId           = 'place';
+const placeUrlDivId     = 'place_url_div';
+const placeUrlId        = 'place_url';
+const placeCommentDivId = 'place_comment_div';
+const placeCommentId    = 'place_comment';
 
+const inputPlaceId        = 'input_place';
+const inputPlaceUrlId     = 'input_place_url';
+const inputPlaceCommentId = 'input_place_comment';
 
 function formMain() {
   // イベント名の編集
@@ -33,7 +44,7 @@ function formMain() {
       editHtml(formTitle);
     });
   });
-  
+  // 開催場所の作成・編集
   const formPlace = new Form(formPlaceId);
   formPlace.openFormId   = openFormPlaceId;
   formPlace.closeFormId  = closeFormPlaceId;
@@ -61,6 +72,34 @@ function editHtml(form) {
         insertMessageList(messageFormTitleId, form.messages);
       }
       break;
+    // 開催場所の作成・編集
+    case formPlaceId:
+      if (form.messages.length == 0) {
+        const place = document.getElementById(placeId);
+        place.textContent = form.model.place;
+        const inputPlace = document.getElementById(inputPlaceId);
+        inputPlace.value = form.model.place;
+        if (form.model.url != '') {
+          const urlDiv = document.getElementById(placeUrlDivId);
+          urlDiv.classList.replace(classHidden, classUnhidden);
+          const url = document.getElementById(placeUrlId);
+          url.href = form.model.url;
+          const inputPlaceUrl = document.getElementById(inputPlaceUrlId);
+          inputPlaceUrl.value = form.model.url;
+        }
+        if (form.model.comment != '') {
+          const commentDiv = document.getElementById(placeCommentDivId);
+          commentDiv.classList.replace(classHidden, classUnhidden);
+          const comment = document.getElementById(placeCommentId);
+          insertStringWithBr(comment, form.model.comment);
+          const inputPlaceComment = document.getElementById(inputPlaceCommentId);
+          inputPlaceComment.value = form.model.comment;
+        }
+        deleteMessageList(messageFormPlaced);
+      } else {
+        insertMessageList(messageFormPlaceId, form.messages);
+      }
+      break;
   }
 }
 
@@ -75,6 +114,16 @@ function insertMessageList(messageId, messages) {
 function deleteMessageList(messageId) {
   const message = document.getElementById(messageId);
   message.innerHTML = ``;
+}
+
+function insertStringWithBr(element, str) {
+  let html = ``;
+  if (str.match(/<script/)) {
+    html = `<p class="text-danger">不正な文字列を検出しました</p>`; 
+  } else {
+    html = `${str.replace(/\r?\n/g, '<br>')}`;
+  }
+  element.insertAdjacentHTML('beforeend', html);
 }
 
 // ブラウザ別動作対応

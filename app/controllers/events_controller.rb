@@ -19,6 +19,11 @@ class EventsController < ApplicationController
 
   def show
     move_to_new_guest if @event.password_digest
+    if @event.event_place
+      @event_place = @event.event_place
+    else
+      @event_place = EventPlace.new
+    end
   end
 
   def update

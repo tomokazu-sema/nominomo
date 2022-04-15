@@ -10,7 +10,7 @@ class Form {
   init() {
     this.flagOpenForm = false;
     this.classHidden = 'visually-hidden';
-    this.classUnhidden = 'nomi-form-dmy';
+    this.classUnhidden = 'nomi-dmy';
   }
 
   set openFormId(id) {
@@ -52,15 +52,15 @@ class Form {
     const formData = new FormData(this.form);
     const token = document.getElementsByName('csrf-token').item(0).content;
     this.XHR = new XMLHttpRequest();
-    this.XHR.open(this.form.getAttribute('data-turbo-method').toUpperCase(), location.pathname, true);
+    this.XHR.open('POST', this.form.action, true);
     this.XHR.responseType = 'json';
     this.XHR.setRequestHeader('X-CSRF-Token', token);
     this.XHR.send(formData);
   }
 
   onload() {
-    this.model = this.XHR.response.model
-    this.messages = this.XHR.response.messages
+    this.model = this.XHR.response.model;
+    this.messages = this.XHR.response.messages;
   }
 
 }

@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <%= form_with model:@event, data: { turbo_method: :patch }, class: 'visually-hidden py-4 bg-nomi-main', id: 'form_title' do |f| %>
+  <%= form_with model:@event, class: 'visually-hidden py-4 bg-nomi-main', id: 'form_title' do |f| %>
     <div class="row mb-2 pb-4 justify-content-center">
       <div class="col-4 nomi-form-width">
         <ul class="mb-0 text-danger" id="message_form_title"></ul>
@@ -38,8 +38,8 @@
 
   <%# 開催場所 ///////////////////////////////////////////////// %>
   <div class="pt-4 mb-4">
-    <div class="row mb-2 justify-content-center nomi-subhead">
-      <div class="col-8 h-100 ps-0 d-flex align-items-center border-bottom h5 nomi-event-width">
+    <div class="row h-100 mb-2 justify-content-center nomi-subhead">
+      <div class="col-8 mb-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
         <div class="ms-0 my-1 nomi-subhead-box"></div>
         <h5 class="ms-2 mb-0">開催場所</h5>
         <% if host_user?(@event) %>
@@ -48,45 +48,73 @@
           <% else %>
             <% open_form_place_text = '作成' %>
           <% end %>
-          <span class="ms-auto btn btn-sm btn-secondary" id="open_form_place"><%= open_form_place_text %></span>
+          <span class="mb-1 ms-auto btn btn-sm btn-secondary" id="open_form_place"><%= open_form_place_text %></span>
         <% end %>  
+      </div>
+
+      <div class="col-8 ps-0 d-flex align-items-center h5 nomi-event-width">
+        <% if @event.event_place %>
+          <h5 class="ms-4" id="place"><%= @event.event_place.place %></h5>
+        <% else %>
+          <h5 class="ms-4" id="place">未入力</h5>
+        <% end %>
+      </div>
+
+      <% if @event.event_place && @event.event_place.url != '' %>
+        <% class_place_url = 'nomi-dmy' %>
+        <% place_url = @event.event_place.url %>
+      <% else %>
+        <% class_place_url = 'visually-hidden' %>
+        <% place_url = '' %>
+      <% end %>
+      <div class="col-8 ps-0 d-flex justify-content-center nomi-event-width <%= class_place_url %>" id="place_url_div">
+        <%= link_to 'お店のページに行く', place_url, class: 'btn btn-secondary', id: 'place_url' %>
+      </div>
+
+      <% if @event.event_place && @event.event_place.comment != '' %>
+        <% class_place_comment = 'nomi-dmy' %>
+        <% place_comment = safe_join(@event.event_place.comment.split("\n"), tag(:br)) %>
+      <% else %>
+        <% class_place_comment = 'visually-hidden' %>
+        <% place_comment = '' %>
+      <% end %>
+      <div class="col-8 ps-0 nomi-event-width <%= class_place_comment %>" id="place_comment_div">
+        <p class="mb-0 ms-4">備考:</p>
+        <div class="ms-4 border" id="place_comment"><%= place_comment %></div>
       </div>
     </div>
   </div>
 
   <% if host_user?(@event) %>
-    <% if @event.event_place %>
-      <% event_place = @event.event_place %>
-      <% submit_form_place_text = '更新' %>
-    <% else %>
-      <% event_place = EventPlace.new %>
-      <% submit_form_place_text = '作成' %>
-    <% end %>
-    <%= form_with model: [@event, event_place], class: 'visually-hidden py-4 bg-nomi-main', id: 'form_place' do |f| %>
+    <%= form_with model: [@event, @event_place], class: 'visually-hidden my-4 bg-nomi-main', id: 'form_place' do |f| %>
       <div class="row mb-2 pb-4 justify-content-center">
         <div class="col-4 nomi-form-width">
           <ul class="mb-0 text-danger" id="message_form_place"></ul>
 
           <%= f.label :place, '開催場所' %>
-          <%= f.text_field :place, class: 'form-control' %>
+          <%= f.text_field :place, class: 'form-control', id: 'input_place' %>
 
           <%= f.label :url, 'URL' %>
-          <%= f.text_field :url, class: 'form-control' %>
+          <%= f.text_field :url, class: 'form-control', id: 'input_place_url' %>
 
           <%= f.label :comment, '備考' %>
-          <%= f.text_area :comment, class: 'form-control' %>
+          <%= f.text_area :comment, class: 'form-control', id: 'input_place_comment' %>
+
+          <div class="row my-4 justify-content-center">
+            <div class="col-2 nomi-form-btn-width">
+              <% name_submit_form_place = '作成' %>
+              <% name_submit_form_place = '編集' if @event.event_place %>
+              <%= f.submit name_submit_form_place, class: 'w-100 btn btn-lg btn-secondary', id: 'submit_form_place' %>
+            </div>
+          </div>
+          <div class="row mb-4 justify-content-center">
+            <div class="col-2 d-flex justify-content-center nomi-form-btn-width">
+              <span class="me-2 btn btn-secondary", id="close_form_place">閉じる</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row mb-4 justify-content-center">
-        <div class="col-2 nomi-form-btn-width">
-          <%= f.submit submit_form_place_text, class: 'w-100 btn btn-lg btn-secondary', id: 'submit_edit_title' %>
-        </div>
-      </div>
-      <div class="row mb-4 pb-2 justify-content-center">
-        <div class="col-2 d-flex justify-content-center nomi-form-btn-width">
-          <span class="me-2 btn btn-secondary", id="close_form_place">閉じる</span>
-        </div>
-      </div>
+      
     <% end %>
   <% end %>
 </div>
