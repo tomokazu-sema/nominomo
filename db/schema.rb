@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_408_025_954) do
+ActiveRecord::Schema[7.0].define(version: 20_220_415_023_606) do
+  create_table 'event_places', charset: 'utf8', force: :cascade do |t|
+    t.bigint 'event_id', null: false
+    t.string 'place', null: false
+    t.string 'url'
+    t.text 'comment'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['event_id'], name: 'index_event_places_on_event_id'
+  end
+
   create_table 'events', charset: 'utf8', force: :cascade do |t|
     t.bigint 'user_id'
     t.string 'uid', null: false
@@ -46,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_408_025_954) do
     t.index ['uid'], name: 'index_users_on_uid', unique: true
   end
 
+  add_foreign_key 'event_places', 'events'
   add_foreign_key 'events', 'users'
   add_foreign_key 'hosts', 'events'
 end

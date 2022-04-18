@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :events, only: %i[new create show update destroy] do
     resources :hosts, only: :show
     get '/hosts/:id/info', to: 'hosts#info'
+    resources :event_places, only: %i[create update]
   end
   get  '/events/:id/sign_in', to: 'events#new_guest'
   post '/events/:id/sign_in', to: 'events#create_guest'

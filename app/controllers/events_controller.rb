@@ -19,12 +19,16 @@ class EventsController < ApplicationController
 
   def show
     move_to_new_guest if @event.password_digest
+    @event_place = @event.event_place || EventPlace.new
   end
 
   def update
-    message = ''
-    message = 'イベント名を入力してください' unless @event.update(event_params_update)
-    render json: { item: @event, message: }
+    messages = if @event.update(event_params_update)
+                 []
+               else
+                 @event.errors.full_messages
+               end
+    render json: { model: @event, messages: }
   end
 
   def destroy
