@@ -1,4 +1,4 @@
-import Form from './form.js'
+import Form from 'form'
 
 const classHidden   = 'visually-hidden';
 const classUnhidden = 'nomi-dmy';
