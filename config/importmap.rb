@@ -10,3 +10,4 @@ pin '@popperjs/core', to: 'https://unpkg.com/@popperjs/core@2.11.2/dist/esm/inde
 
 pin 'hosts_info'
 pin 'events_show'
+pin 'form'
