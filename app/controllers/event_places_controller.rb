@@ -10,6 +10,13 @@ class EventPlacesController < ApplicationController
   end
 
   def update
+    event_place = EventPlace.find(params[:id])
+    if event_place.update(event_place_params)
+      messages = []
+    else
+      messages = event_place.errors.full_messages
+    end
+    render json: { model: event_place, messages: messages }
   end
 
   private

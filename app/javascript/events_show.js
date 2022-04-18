@@ -75,27 +75,34 @@ function editHtml(form) {
     // 開催場所の作成・編集
     case formPlaceId:
       if (form.messages.length == 0) {
+        // 開催場所
         const place = document.getElementById(placeId);
         place.textContent = form.model.place;
         const inputPlace = document.getElementById(inputPlaceId);
         inputPlace.value = form.model.place;
+        // URL
+        const urlDiv = document.getElementById(placeUrlDivId);
         if (form.model.url != '') {
-          const urlDiv = document.getElementById(placeUrlDivId);
           urlDiv.classList.replace(classHidden, classUnhidden);
           const url = document.getElementById(placeUrlId);
           url.href = form.model.url;
           const inputPlaceUrl = document.getElementById(inputPlaceUrlId);
           inputPlaceUrl.value = form.model.url;
+        } else {
+          urlDiv.classList.replace(classUnhidden, classHidden);
         }
+        // 備考
+        const commentDiv = document.getElementById(placeCommentDivId);
         if (form.model.comment != '') {
-          const commentDiv = document.getElementById(placeCommentDivId);
           commentDiv.classList.replace(classHidden, classUnhidden);
           const comment = document.getElementById(placeCommentId);
-          insertStringWithBr(comment, form.model.comment);
+          replaceStringWithBr(comment, form.model.comment);
           const inputPlaceComment = document.getElementById(inputPlaceCommentId);
           inputPlaceComment.value = form.model.comment;
+        } else {
+          commentDiv.classList.replace(classUnhidden, classHidden);
         }
-        deleteMessageList(messageFormPlaced);
+        deleteMessageList(messageFormPlaceId);
       } else {
         insertMessageList(messageFormPlaceId, form.messages);
       }
@@ -116,14 +123,21 @@ function deleteMessageList(messageId) {
   message.innerHTML = ``;
 }
 
-function insertStringWithBr(element, str) {
-  let html = ``;
-  if (str.match(/<script/)) {
-    html = `<p class="text-danger">不正な文字列を検出しました</p>`; 
-  } else {
-    html = `${str.replace(/\r?\n/g, '<br>')}`;
+function replaceStringWithBr(element, str) {
+  let index
+  str = str.replace(/\r?\n/g, '<br>');
+  element.innerHTML = ``;
+  while (str != '') {
+    index = str.indexOf('<br>');
+    if (index != -1) {
+      if (index > 0) element.insertAdjacentText('beforeend', str.slice(0, index));
+      element.insertAdjacentHTML('beforeend', `<br>`);
+      str = str.slice(index + 4);
+    } else {
+      if (str != '') element.insertAdjacentText('beforeend', str);
+      str = '';
+    }
   }
-  element.insertAdjacentHTML('beforeend', html);
 }
 
 // ブラウザ別動作対応
