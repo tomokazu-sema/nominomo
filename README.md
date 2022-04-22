@@ -1,24 +1,96 @@
-# README
+# アプリケーション名
+nominomo
+<br>
+<br>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# アプリケーション概要
+飲み会の幹事を助ける飲み会に特化した日程調整アプリ。<br>
+アンケート機能や乗り合わせ調整機能などを実装予定。
+<br>
+<br>
 
-Things you may want to cover:
+# URL
+http://nominomo.net
+<br>
+<br>
 
-* Ruby version
+# テスト用アカウント
+- Basic認証ID: study37687f
+- Basic認証Password: study37687f
+- メールアドレス: testuser1@test
+- パスワード: pass1234
+<br>
+<br>
 
-* System dependencies
+# 利用方法
+本アプリはcookieを利用しているため、ブラウザの設定でcookieを許可する必要がある
+## ユーザー登録
+1. Topページのヘッダーからユーザー登録を行う
 
-* Configuration
+なお、ユーザー登録を行わなくても利用可能である。
+ユーザー登録を行わない場合以下の制限がある。
 
-* Database creation
+- ユーザーページ(日程調整一覧)の利用不可
+- 日程調整の保存期限が無期限にならない
+- 別のブラウザ、端末から主催者(幹事)としてアクセスする場合、主催者用URLが必要になる
 
-* Database initialization
+## 日程調整
+1. Topページもしくはユーザーページから日程調整を作成する
+2. イベント名と閲覧パスワード(任意)を入力する
+3. ログインしていない場合、主催者ページのURLをブックマークする必要がある
+4. 参加者に参加者用URLを通知する
+5. 他に主催者役がいる場合、主催者用URLを通知する
+6. 日程調整ページから各種調整を行うことができる
+<br>
+<br>
 
-* How to run the test suite
+# アプリケーションを作成した背景
+職場での懇親会の幹事をしたときに、業務をしながら日程をはじめとする各種調整のメール連絡を頻繁に行わなければならず負担に感じた。<br>
+そのため、幹事の負担を減らせる様なアプリの開発を思い立つに至った。
+<br>
+<br>
 
-* Services (job queues, cache servers, search engines, etc.)
+# 洗い出した要件
+https://docs.google.com/spreadsheets/d/1-s4CTwQhnfxOJ7d44t-skg8lLZg4GL5phUQrc5jFS2U/edit?usp=sharing
+<br>
+<br>
 
-* Deployment instructions
+# 実装した機能についての画像やGIFおよびその説明
+準備中
+<br>
+<br>
 
-* ...
+# 実装予定の機能
+日程調整機能<br>
+アンケート機能<br>
+乗り合わせ調整機能<br>
+会費管理機能<br>
+会計報告機能<br>
+<br>
+<br>
+
+# データベース設計
+![ER図](./ER.png)
+<br>
+<br>
+
+# 画面遷移図
+![画面遷移図](./ST.png)
+<br>
+<br>
+
+# 開発環境
+ruby 3.1.1<br>
+rails 7.0.2.3<br>
+MySQL 8.0.23<br>
+Docker 4.7.1<br>
+<br>
+<br>
+
+# ローカルでの動作方法
+準備中
+<br>
+<br>
+
+# 工夫したポイント
+準備中
