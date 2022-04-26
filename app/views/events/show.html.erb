@@ -54,9 +54,9 @@
 
       <div class="col-8 ps-0 d-flex align-items-center h5 nomi-event-width">
         <% if @event.event_place %>
-          <h5 class="ms-4" id="place"><%= @event.event_place.place %></h5>
+          <h5 class="ms-4"><%= @event.event_place.place %></h5>
         <% else %>
-          <h5 class="ms-4" id="place">未入力</h5>
+          <h5 class="ms-4">未入力</h5>
         <% end %>
       </div>
 
@@ -67,8 +67,8 @@
         <% class_place_url = 'visually-hidden' %>
         <% place_url = '' %>
       <% end %>
-      <div class="col-8 ps-0 d-flex justify-content-center nomi-event-width <%= class_place_url %>" id="place_url_div">
-        <%= link_to 'お店のページに行く', place_url, class: 'btn btn-secondary', id: 'place_url' %>
+      <div class="col-8 ps-0 d-flex justify-content-center nomi-event-width <%= class_place_url %>">
+        <%= link_to 'お店のページに行く', place_url, class: 'btn btn-secondary' %>
       </div>
 
       <% if @event.event_place && @event.event_place.comment != '' %>
@@ -78,9 +78,9 @@
         <% class_place_comment = 'visually-hidden' %>
         <% place_comment = '' %>
       <% end %>
-      <div class="col-8 ps-0 nomi-event-width <%= class_place_comment %>" id="place_comment_div">
+      <div class="col-8 ps-0 nomi-event-width <%= class_place_comment %>">
         <p class="mb-0 ms-4">備考:</p>
-        <div class="ms-4 border" id="place_comment"><%= place_comment %></div>
+        <div class="ms-4 border"><%= place_comment %></div>
       </div>
     </div>
   </div>
@@ -92,13 +92,13 @@
           <ul class="mb-0 text-danger" id="message_form_place"></ul>
 
           <%= f.label :place, '開催場所' %>
-          <%= f.text_field :place, class: 'form-control', id: 'input_place' %>
+          <%= f.text_field :place, class: 'form-control' %>
 
           <%= f.label :url, 'URL' %>
-          <%= f.text_field :url, class: 'form-control', id: 'input_place_url' %>
+          <%= f.text_field :url, class: 'form-control' %>
 
           <%= f.label :comment, '備考' %>
-          <%= f.text_area :comment, class: 'form-control', id: 'input_place_comment' %>
+          <%= f.text_area :comment, class: 'form-control' %>
 
           <div class="row my-4 justify-content-center">
             <div class="col-2 nomi-form-btn-width">

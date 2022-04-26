@@ -19,16 +19,6 @@ const closeFormPlaceId   = 'close_form_place';
 const submitFormPlaceId  = 'submit_form_place'; 
 const messageFormPlaceId = 'message_form_place';
 
-const placeId           = 'place';
-const placeUrlDivId     = 'place_url_div';
-const placeUrlId        = 'place_url';
-const placeCommentDivId = 'place_comment_div';
-const placeCommentId    = 'place_comment';
-
-const inputPlaceId        = 'input_place';
-const inputPlaceUrlId     = 'input_place_url';
-const inputPlaceCommentId = 'input_place_comment';
-
 function formMain() {
   // イベント名の編集
   const formTitle = new Form(formTitleId);
@@ -75,34 +65,7 @@ function editHtml(form) {
     // 開催場所の作成・編集
     case formPlaceId:
       if (form.messages.length == 0) {
-        // 開催場所
-        const place = document.getElementById(placeId);
-        place.textContent = form.model.place;
-        const inputPlace = document.getElementById(inputPlaceId);
-        inputPlace.value = form.model.place;
-        // URL
-        const urlDiv = document.getElementById(placeUrlDivId);
-        if (form.model.url != '') {
-          urlDiv.classList.replace(classHidden, classUnhidden);
-          const url = document.getElementById(placeUrlId);
-          url.href = form.model.url;
-          const inputPlaceUrl = document.getElementById(inputPlaceUrlId);
-          inputPlaceUrl.value = form.model.url;
-        } else {
-          urlDiv.classList.replace(classUnhidden, classHidden);
-        }
-        // 備考
-        const commentDiv = document.getElementById(placeCommentDivId);
-        if (form.model.comment != '') {
-          commentDiv.classList.replace(classHidden, classUnhidden);
-          const comment = document.getElementById(placeCommentId);
-          replaceStringWithBr(comment, form.model.comment);
-          const inputPlaceComment = document.getElementById(inputPlaceCommentId);
-          inputPlaceComment.value = form.model.comment;
-        } else {
-          commentDiv.classList.replace(classUnhidden, classHidden);
-        }
-        deleteMessageList(messageFormPlaceId);
+        location.reload();
       } else {
         insertMessageList(messageFormPlaceId, form.messages);
       }
