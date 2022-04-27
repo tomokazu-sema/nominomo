@@ -4,4 +4,5 @@ class PossibleDate < ApplicationRecord
 
   # アソシエーション
   belongs_to :event
+  has_one    :event_date
 end
