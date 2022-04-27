@@ -9,8 +9,8 @@
     <h1 class="col text-center" id="title"><%= Event.find(@event.id).title %></h1>
     <div class="col d-flex justify-content-end align-items-center">
       <% if host_user?(@event) %>
-        <span class="me-2 btn btn-secondary", id="open_form_title">編集</span>
-        <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "日程調整の削除は取り消せません。\n本当に削除しますか？" } }, class: 'me-2 btn btn-secondary' %>
+        <span class="me-2 btn btn-sm btn-secondary", id="open_form_title">編集</span>
+        <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "日程調整の削除は取り消せません。\n本当に削除しますか？" } }, class: 'me-2 btn btn-sm btn-secondary' %>
       <% end %>
     </div>
   </div>
@@ -52,23 +52,16 @@
         <% end %>  
       </div>
 
-      <div class="col-8 ps-0 d-flex align-items-center h5 nomi-event-width">
+      <div class="col-8 ps-0 d-flex align-items-center h3 nomi-event-width">
         <% if @event.event_place %>
-          <h5 class="ms-4"><%= @event.event_place.place %></h5>
+          <% if @event.event_place.url != '' %>
+            <%= link_to @event.event_place.place, @event.event_place.url, class: 'ms-4' %>
+          <% else %>
+            <h3 class="ms-4"><%= @event.event_place.place %></h3>
+          <% end %>
         <% else %>
           <h5 class="ms-4">未入力</h5>
         <% end %>
-      </div>
-
-      <% if @event.event_place && @event.event_place.url != '' %>
-        <% class_place_url = 'nomi-dmy' %>
-        <% place_url = @event.event_place.url %>
-      <% else %>
-        <% class_place_url = 'visually-hidden' %>
-        <% place_url = '' %>
-      <% end %>
-      <div class="col-8 ps-0 d-flex justify-content-center nomi-event-width <%= class_place_url %>">
-        <%= link_to 'お店のページに行く', place_url, class: 'btn btn-secondary' %>
       </div>
 
       <% if @event.event_place && @event.event_place.comment != '' %>
@@ -79,7 +72,7 @@
         <% place_comment = '' %>
       <% end %>
       <div class="col-8 ps-0 nomi-event-width <%= class_place_comment %>">
-        <p class="mb-0 ms-4">備考:</p>
+        <p class="mt-2 mb-0 ms-4">備考:</p>
         <div class="ms-4 border"><%= place_comment %></div>
       </div>
     </div>
@@ -117,4 +110,99 @@
       
     <% end %>
   <% end %>
+
+  <%# 開催日 ///////////////////////////////////////////////// %>
+  <div class="pt-4 mb-4">
+    <div class="row h-100 mb-2 justify-content-center nomi-subhead">
+      <div class="col-8 mb-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+        <div class="ms-0 my-1 nomi-subhead-box"></div>
+        <h5 class="ms-2 mb-0">開催日</h5>
+      </div>
+
+      <div class="col-8 ps-0 d-flex align-items-center h5 nomi-event-width">
+        <h3 class="ms-4">未入力</h3>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <%# 日程調整 ///////////////////////////////////////////////// %>
+  <div class="pt-4 mb-4">
+    <div class="row h-100 mb-2 justify-content-center nomi-subhead">
+      <div class="col-8 mb-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+        <div class="ms-0 my-1 nomi-subhead-box"></div>
+        <h5 class="ms-2 mb-0">日程調整</h5>
+        <span class="mb-1 ms-auto btn btn-sm btn-secondary" id="open_form_date">追加</span>
+      </div>
+
+      <div class="col-8 mt-4 ps-0 nomi-event-width nomi-overflow-x">
+        <table class="table ms-4 text-center">
+          <tr>
+            <td class="nomi-table-date">候補日時</td>
+            <td>参加者</td>
+            <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">田中</span></td>
+            <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">山田</span></td>
+            <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">長曾我部</span></td>
+            <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">佐藤</span></td>
+            <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">大木戸</span></td>
+            <td class="text-end">
+              <span class="btn btn-sm btn-dark" id="">追加</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="h5 text-start">2/30 17:00</td>
+            <td>4</td>
+            <td>⭕️</td>
+            <td>❌</td>
+            <td>⭕️</td>
+            <td>⭕️</td>
+            <td>⭕️</td>
+            <td class="text-end">
+              <span class="btn btn-sm btn-secondary" id="">編集</span>
+              <span class="btn btn-sm btn-secondary" id="">確定</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="h5 text-start">2/31 17:00</td>
+            <td>4</td>
+            <td>⭕️</td>
+            <td>❌</td>
+            <td>⭕️</td>
+            <td>⭕️</td>
+            <td>⭕️</td>
+            <td class="text-end">
+              <span class="btn btn-sm btn-secondary" id="">編集</span>
+              <span class="btn btn-sm btn-secondary" id="">確定</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="h5 text-start">2/32 17:00</td>
+            <td>3</td>
+            <td>⭕️</td>
+            <td>❌</td>
+            <td>⭕️</td>
+            <td>❌</td>
+            <td>⭕️</td>
+            <td class="text-end">
+              <span class="btn btn-sm btn-secondary" id="">編集</span>
+              <span class="btn btn-sm btn-secondary" id="">確定</span>
+            </td>
+          </tr>
+          <tr class="small">
+            <td>コメント</td>
+            <td></td>
+            <td></td>
+            <td class="nomi-table-date-comment">行けたら行く多分行けないと思う</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </div> 
+
+    </div>
+  </div>
+
 </div>

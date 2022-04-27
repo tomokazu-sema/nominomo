@@ -76,3 +76,17 @@ main {
 .nomi-dmy {
   visibility: visible;
 }
+
+.nomi-table-date {
+  min-width: 120px;
+}
+
+.nomi-table-date-guest {
+  min-width: 120px;
+}
+
+.nomi-table-date-comment {
+  text-align: start;
+  overflow-x: visible;
+  white-space: normal;
+}
