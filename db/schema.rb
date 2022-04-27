@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_15_023606) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_27_073307) do
   create_table "event_places", charset: "utf8", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.string "place", null: false
@@ -41,6 +41,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_023606) do
     t.index ["uid"], name: "index_hosts_on_uid", unique: true
   end
 
+  create_table "possible_dates", charset: "utf8", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_possible_dates_on_event_id"
+  end
+
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "uid", null: false
     t.string "name", null: false
@@ -59,4 +67,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_023606) do
   add_foreign_key "event_places", "events"
   add_foreign_key "events", "users"
   add_foreign_key "hosts", "events"
+  add_foreign_key "possible_dates", "events"
 end
