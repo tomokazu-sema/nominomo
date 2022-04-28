@@ -1,6 +1,6 @@
 class PossibleDate < ApplicationRecord
   # バリデーション
-  validates :date, presence: true
+  validates :datetime, presence: true
 
   # アソシエーション
   belongs_to :event

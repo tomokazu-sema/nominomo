@@ -71,7 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_27_084217) do
 
   create_table "possible_dates", charset: "utf8", force: :cascade do |t|
     t.bigint "event_id", null: false
-    t.date "date", null: false
+    t.datetime "datetime", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_possible_dates_on_event_id"

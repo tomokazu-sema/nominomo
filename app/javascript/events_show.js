@@ -19,6 +19,13 @@ const closeFormPlaceId   = 'close_form_place';
 const submitFormPlaceId  = 'submit_form_place'; 
 const messageFormPlaceId = 'message_form_place';
 
+// 候補日の作成
+const formDateId        = 'form_date';
+const openFormDateId    = 'open_form_date';
+const closeFormDateId   = 'close_form_date';
+const submitFormDateId  = 'submit_form_date';
+const messageFormDateId = 'message_form_date';
+
 function formMain() {
   // イベント名の編集
   const formTitle = new Form(formTitleId);
@@ -48,6 +55,20 @@ function formMain() {
       editHtml(formPlace);
     });
   });
+  // 候補日の作成
+  const formDate = new Form(formDateId);
+  formDate.openFormId   = openFormDateId;
+  formDate.closeFormId  = closeFormDateId;
+  formDate.submitFormId = submitFormDateId;
+  formDate.openForm.addEventListener('click', () => { formDate.openClose() });
+  formDate.closeForm.addEventListener('click', () => { formDate.close() });
+  formDate.submitForm.addEventListener('click', (e) => {
+    formDate.submit(e);
+    formDate.XHR.addEventListener('load', () => {
+      formDate.onload();
+      editHtml(formDate);
+    });
+  });
 }
 
 function editHtml(form) {
@@ -68,6 +89,14 @@ function editHtml(form) {
         location.reload();
       } else {
         insertMessageList(messageFormPlaceId, form.messages);
+      }
+      break;
+    // 候補日の作成
+    case formDateId:
+      if (form.messages.length == 0) {
+        location.reload();
+      } else {
+        insertMessageList(messageFormDateId, form.messages);
       }
       break;
   }

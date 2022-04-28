@@ -96,7 +96,7 @@
           <div class="row my-4 justify-content-center">
             <div class="col-2 nomi-form-btn-width">
               <% name_submit_form_place = '作成' %>
-              <% name_submit_form_place = '編集' if @event.event_place %>
+              <% name_submit_form_place = '更新' if @event.event_place %>
               <%= f.submit name_submit_form_place, class: 'w-100 btn btn-lg btn-secondary', id: 'submit_form_place' %>
             </div>
           </div>
@@ -143,15 +143,31 @@
             <td>参加者</td>
             <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">田中</span></td>
             <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">山田</span></td>
-            <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">長曾我部</span></td>
+            <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">木村</span></td>
             <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">佐藤</span></td>
-            <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">大木戸</span></td>
+            <td class="nomi-table-date-guest"><span class="btn btn-sm btn-dark">中村</span></td>
             <td class="text-end">
               <span class="btn btn-sm btn-dark" id="">追加</span>
             </td>
           </tr>
+          <% @possible_dates.each do |possible_date| %>
+            <tr>
+              <td class="h5 text-start"><%= possible_date.datetime.strftime("%m/%d %H:%M") %></td>
+              <td>4</td>
+              <td>⭕️</td>
+              <td>❌</td>
+              <td>⭕️</td>
+              <td>⭕️</td>
+              <td>⭕️</td>
+              <td class="text-end">
+                <span class="btn btn-sm btn-secondary" id="">編集</span>
+                <span class="btn btn-sm btn-secondary" id="">確定</span>
+              </td>
+            </tr>
+          <% end %>
+          <%#
           <tr>
-            <td class="h5 text-start">2/30 17:00</td>
+            <td class="h5 text-start">5/20 17:00</td>
             <td>4</td>
             <td>⭕️</td>
             <td>❌</td>
@@ -164,7 +180,7 @@
             </td>
           </tr>
           <tr>
-            <td class="h5 text-start">2/31 17:00</td>
+            <td class="h5 text-start">5/21 17:00</td>
             <td>4</td>
             <td>⭕️</td>
             <td>❌</td>
@@ -177,7 +193,7 @@
             </td>
           </tr>
           <tr>
-            <td class="h5 text-start">2/32 17:00</td>
+            <td class="h5 text-start">5/22 17:00</td>
             <td>3</td>
             <td>⭕️</td>
             <td>❌</td>
@@ -189,6 +205,7 @@
               <span class="btn btn-sm btn-secondary" id="">確定</span>
             </td>
           </tr>
+          %>
           <tr class="small">
             <td>コメント</td>
             <td></td>
@@ -205,4 +222,28 @@
     </div>
   </div>
 
+  <% if host_user?(@event) %>
+    <%= form_with url: "#{request.url}/possible_dates", class: 'visually-hidden my-4 bg-nomi-main', id: 'form_date' do |f| %>
+      <div class="row mb-2 pb-4 justify-content-center">
+        <div class="col-4 nomi-form-width">
+          <ul class="mb-0 text-danger" id="message_form_date"></ul>
+
+          <%= f.label :datetime, '開催場所' %>
+          <%= f.datetime_field :datetime, class: 'form-control' %>
+
+          <div class="row my-4 justify-content-center">
+            <div class="col-2 nomi-form-btn-width">
+              <%= f.submit '作成', class: 'w-100 btn btn-lg btn-secondary', id: 'submit_form_date' %>
+            </div>
+          </div>
+          <div class="row mb-4 justify-content-center">
+            <div class="col-2 d-flex justify-content-center nomi-form-btn-width">
+              <span class="me-2 btn btn-secondary", id="close_form_date">閉じる</span>
+            </div>
+          </div>
+        </div>
+      </div> 
+      
+    <% end %>
+  <% end %>
 </div>

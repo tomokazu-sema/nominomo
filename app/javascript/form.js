@@ -51,8 +51,13 @@ class Form {
     e.preventDefault();
     const formData = new FormData(this.form);
     const token = document.getElementsByName('csrf-token').item(0).content;
+    let method = 'POST';
+    let url = this.form.action;
+    if (this.submitForm.value == '更新') {
+      method = 'PATCH';
+    }
     this.XHR = new XMLHttpRequest();
-    this.XHR.open('POST', this.form.action, true);
+    this.XHR.open(method, url, true);
     this.XHR.responseType = 'json';
     this.XHR.setRequestHeader('X-CSRF-Token', token);
     this.XHR.send(formData);
