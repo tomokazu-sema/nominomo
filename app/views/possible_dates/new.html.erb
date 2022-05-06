@@ -1,0 +1,27 @@
+<div class="container">
+  <%= turbo_frame_tag 'possible_date' do %>
+
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+        <div class="ms-0 my-1 nomi-subhead-box"></div>
+        <div class="ms-2 mb-0 h5">日程調整</div>
+      </div>
+    </div>
+
+    <%= form_with model: [@event, @possible_date] do |f| %>
+      <div class="row h-100 justify-content-center">
+        <div class="col-8 mt-2 pt-2 pb-4 ps-0 d-flex flex-column align-items-center nomi-event-width bg-nomi-main">
+          
+          <div class="w-50 mt-2">
+            <%= f.label :datetime, '開催場所' %>
+            <%= f.datetime_field :datetime, class: 'form-control' %>
+          </div>
+        
+          <%= f.submit '追加', class: 'w-25 mt-2 btn btn-lg btn-secondary' %>
+          <%= link_to '閉じる', event_path(@event), class: 'mt-4 btn btn-secondary' %>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+</div>

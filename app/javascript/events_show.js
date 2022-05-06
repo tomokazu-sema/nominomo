@@ -55,6 +55,7 @@ function formMain() {
       editHtml(formPlace);
     });
   });
+  /*
   // 候補日の作成
   const formDate = new Form(formDateId);
   formDate.openFormId   = openFormDateId;
@@ -69,6 +70,7 @@ function formMain() {
       editHtml(formDate);
     });
   });
+  */
 }
 
 function editHtml(form) {
