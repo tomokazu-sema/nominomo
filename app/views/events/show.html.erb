@@ -141,7 +141,46 @@
 
       <div class="row h-100 justify-content-center">
         <div class="col-8 mt-2 ps-0 nomi-event-width nomi-overflow-x">
-          <table class="table ms-4 text-center">
+
+          <div class="d-flex">
+            <div class="nomi-table-date-date">
+              候補日時
+            </div>
+            <div class="nomi-table-date-guestnum">
+              ◯の数
+            </div>
+            <div class="nomi-table-date-btn">
+              <span class="btn btn-sm btn-dark">参加者追加</span>
+            </div>
+          </div>
+
+          <% @possible_dates.each do |possible_date| %>
+          <% tag_edit_possible_date = "edit_possible_date_#{possible_date.id}" %>
+          <%= turbo_frame_tag tag_edit_possible_date do %>
+            <div class="d-flex">
+              <div class="nomi-table-date-date h5 my-0">
+                <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
+              </div>
+              <div class="nomi-table-date-guestnum">
+                0
+              </div>
+              <div class="nomi-table-date-btn">
+                <%= link_to '編集', edit_event_possible_date_path(@event, possible_date), 'data-turbo-frame': tag_edit_possible_date, autoscroll: true, data: { autoscroll_block: "start" }, class: 'btn btn-sm btn-secondary' %>
+                <span class="ms-1 btn btn-sm btn-secondary" id="">確定</span>
+              </div>
+            </div>  
+          <% end %>
+          <% end %>
+
+          <div class="d-flex">
+            <div class="nomi-table-date-date">
+              コメント
+            </div>
+            <div class="nomi-table-date-guestnum"></div>
+            <div class="nomi-table-date-btn"></div>
+          </div>
+
+          <!--<table class="table ms-4 text-center">
             <tr>
               <td class="nomi-table-date">候補日時</td>
               <td>参加者</td>
@@ -154,20 +193,22 @@
                 <span class="btn btn-sm btn-dark" id="">追加</span>
               </td>
             </tr>
-            <% @possible_dates.each do |possible_date| %>
-              <tr>
-                <td class="h5 text-start"><%= possible_date.datetime.strftime("%m/%d %H:%M") %></td>
-                <td>4</td>
-                <td>⭕️</td>
-                <td>❌</td>
-                <td>⭕️</td>
-                <td>⭕️</td>
-                <td>⭕️</td>
-                <td class="text-end">
-                  <span class="btn btn-sm btn-secondary" id="">編集</span>
-                  <span class="btn btn-sm btn-secondary" id="">確定</span>
-                </td>
-              </tr>
+            <%= turbo_frame_tag 'edit_possible_date' do %>
+              <% @possible_dates.each do |possible_date| %>
+                <tr>
+                  <td class="h5 text-start"><%= possible_date.datetime.strftime("%m/%d %H:%M") %></td>
+                  <td>4</td>
+                  <td>⭕️</td>
+                  <td>❌</td>
+                  <td>⭕️</td>
+                  <td>⭕️</td>
+                  <td>⭕️</td>
+                  <td class="text-end">
+                    <%= link_to '編集', edit_event_possible_date_path(@event, possible_date), "data-turbo-frame": "edit_possible_date", class: 'btn btn-sm btn-secondary' %>
+                    <span class="btn btn-sm btn-secondary" id="">確定</span>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
             <tr class="small">
               <td>コメント</td>
@@ -179,7 +220,7 @@
               <td></td>
               <td></td>
             </tr>
-          </table>
+          </table>-->
         </div> 
       </div>
     <% end %>

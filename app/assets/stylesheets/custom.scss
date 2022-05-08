@@ -73,6 +73,7 @@ main {
   visibility: visible;
 }
 
+/* 後で削除
 .nomi-table-date {
   min-width: 120px;
 }
@@ -85,4 +86,31 @@ main {
   text-align: start;
   overflow-x: visible;
   white-space: normal;
+}
+*/
+
+.nomi-table-date-cell {
+  @extend .d-flex;
+  @extend .justify-content-center;
+  @extend .align-items-center;
+  @extend .border;
+  min-height: 80px;
+}
+
+.nomi-table-date-date {
+  @extend .nomi-table-date-cell;
+  min-width: 180px;
+  max-width: 180px;
+}
+
+.nomi-table-date-guestnum {
+  @extend .nomi-table-date-cell;
+  min-width: 80px;
+  max-width: 80px;
+}
+
+.nomi-table-date-btn {
+  @extend .nomi-table-date-cell;
+  min-width: 120px;
+  max-width: 120px;
 }
