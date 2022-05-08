@@ -5,6 +5,7 @@
         <div class="ms-0 my-1 nomi-subhead-box"></div>
         <div class="ms-2 mb-0 h5">日程調整</div>
         <%= link_to '戻る', event_path(@event), 'data-turbo-frame': 'date_guest_table', class: 'mb-1 ms-auto btn btn-sm btn-dark' %>
+        <%= button_to '削除', event_guest_path(@event, @guest), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: 'delete', class: 'mb-1 ms-1 btn btn-sm btn-dark' %>
       </div>
     </div>
 

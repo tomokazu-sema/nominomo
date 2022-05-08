@@ -173,7 +173,7 @@
                 </div>
               <% end %>
               <div class="nomi-table-date-btn">
-                <%= button_to '削除', event_possible_date_path(@event, possible_date), method: 'delete', class: 'btn btn-sm btn-secondary' %>
+                <%= button_to '削除', event_possible_date_path(@event, possible_date), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: 'delete', class: 'btn btn-sm btn-secondary' %>
                 <span class="ms-1 btn btn-sm btn-secondary" id="">確定</span>
               </div>
             </div>  
