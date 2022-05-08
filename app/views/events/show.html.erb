@@ -135,7 +135,8 @@
         <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
           <div class="ms-0 my-1 nomi-subhead-box"></div>
           <div class="ms-2 mb-0 h5">日程調整</div>
-          <%= link_to '追加', new_event_possible_date_path(@event), 'data-turbo-frame': 'date_guest_table', class: 'mb-1 ms-auto btn btn-sm btn-secondary' %>
+          <%= link_to '候補日追加', new_event_possible_date_path(@event), 'data-turbo-frame': 'date_guest_table', class: 'mb-1 ms-auto btn btn-sm btn-secondary' %>
+          <%= link_to '参加者追加', new_event_guest_path(@event), 'data-turbo-frame': 'date_guest_table', class: 'mb-1 ms-1 btn btn-sm btn-dark' %>
         </div>
       </div>
 
@@ -151,11 +152,10 @@
             </div>
             <% @guests.each do |guest| %>
               <div class="nomi-table-date-guest">
-                <%= link_to guest.name, '#', class: 'btn btn-sm btn-dark mx-1 px-1' %>
+                <%= link_to guest.name, edit_event_guest_path(@event, guest), class: 'btn btn-sm btn-dark mx-1 px-1' %>
               </div>
             <% end %>
             <div class="nomi-table-date-btn">
-              <%= link_to '参加者追加', new_event_guest_path(@event), class: 'btn btn-sm btn-dark' %>
             </div>
           </div>
 
