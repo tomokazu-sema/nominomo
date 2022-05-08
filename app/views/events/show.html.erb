@@ -151,7 +151,7 @@
             </div>
             <% @guests.each do |guest| %>
               <div class="nomi-table-date-guest">
-                <%= guest.name %>
+                <%= link_to guest.name, '#', class: 'btn btn-sm btn-dark mx-1 px-1' %>
               </div>
             <% end %>
             <div class="nomi-table-date-btn">
