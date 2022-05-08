@@ -1,6 +1,5 @@
 class PossibleDatesController < ApplicationController
   before_action :set_event
-  before_action :set_possible_date, only: [:edit, :update]
 
   def new
     @possible_date = PossibleDate.new
@@ -15,14 +14,11 @@ class PossibleDatesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @possible_date = @possible_date.update(possible_date_params)
-      respond_to do |format|
-        format.html { redirect_to event_path(@event) }
-      end
+  def destroy
+    possible_date = PossibleDate.find(params[:id])
+    possible_date.destroy
+    respond_to do |format|
+      format.html { redirect_to event_path(@event) }
     end
   end
 
@@ -30,10 +26,6 @@ class PossibleDatesController < ApplicationController
 
   def set_event
     @event = Event.find_by(uid: params[:event_id])
-  end
-
-  def set_possible_date
-    @possible_date = PossibleDate.find(params[:id])
   end
 
   def possible_date_params
