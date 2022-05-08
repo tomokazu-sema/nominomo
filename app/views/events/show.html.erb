@@ -186,7 +186,7 @@
             <div class="nomi-table-date-guestnum"></div>
             <% @guests.each do |guest| %>
               <div class="nomi-table-date-comment">
-                <%= guest.comment %>
+                <%= safe_join(guest.comment.split("\n"), tag(:br)) %>
               </div>
             <% end %>
             <div class="nomi-table-date-btn"></div>
