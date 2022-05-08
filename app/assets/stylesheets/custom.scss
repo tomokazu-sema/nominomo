@@ -115,8 +115,21 @@ main {
   max-width: 140px;
 }
 
+.nomi-table-date-guest {
+  @extend .nomi-table-date-cell;
+  min-width: 80px;
+  max-width: 80px;
+}
+
 .nomi-table-date-btn {
   @extend .nomi-table-date-cell;
   min-width: 120px;
   max-width: 120px;
+}
+
+.nomi-table-date-comment {
+  @extend .border;
+  @extend .text-wrap;
+  min-width: 80px;
+  max-width: 80px;
 }
