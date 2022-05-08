@@ -21,6 +21,7 @@ class EventsController < ApplicationController
     move_to_new_guest if @event.password_digest
     @event_place = @event.event_place || EventPlace.new
     @possible_dates = @event.possible_dates.order(datetime: :ASC)
+    @gusets = @event.guests.order(created_at: :ASC)
   end
 
   def update

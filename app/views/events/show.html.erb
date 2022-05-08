@@ -130,12 +130,12 @@
 
 <%# 日程調整 ///////////////////////////////////////////////// %>
   <div class="pt-4 pb-4">
-    <%= turbo_frame_tag 'possible_date' do %>
+    <%= turbo_frame_tag 'date_guest_table' do %>
       <div class="row h-100 justify-content-center">
         <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
           <div class="ms-0 my-1 nomi-subhead-box"></div>
           <div class="ms-2 mb-0 h5">日程調整</div>
-          <%= link_to '追加', new_event_possible_date_path(@event), 'data-turbo-frame': 'possible_date', class: 'mb-1 ms-auto btn btn-sm btn-secondary' %>
+          <%= link_to '追加', new_event_possible_date_path(@event), 'data-turbo-frame': 'date_guest_table', class: 'mb-1 ms-auto btn btn-sm btn-secondary' %>
         </div>
       </div>
 
@@ -150,7 +150,7 @@
               ◯の数
             </div>
             <div class="nomi-table-date-btn">
-              <span class="btn btn-sm btn-dark">参加者追加</span>
+              <%= link_to '参加者追加', new_event_guest_path(@event), class: 'btn btn-sm btn-dark' %>
             </div>
           </div>
 

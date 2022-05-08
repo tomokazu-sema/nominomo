@@ -109,6 +109,12 @@ main {
   max-width: 80px;
 }
 
+.nomi-table-date-guestinput {
+  @extend .nomi-table-date-cell;
+  min-width: 140px;
+  max-width: 140px;
+}
+
 .nomi-table-date-btn {
   @extend .nomi-table-date-cell;
   min-width: 120px;
