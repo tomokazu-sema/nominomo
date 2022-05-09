@@ -140,6 +140,7 @@
         </div>
       </div>
 
+      <%# 日程調整 - 表部分 %>
       <div class="row h-100 justify-content-center">
         <div class="col-8 mt-2 ps-0 nomi-event-width nomi-overflow-x">
 
@@ -160,7 +161,6 @@
           </div>
 
           <% @possible_dates.each do |possible_date| %>
-
             <div class="d-flex">
               <div class="nomi-table-date-date h5 my-0">
                 <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
@@ -199,7 +199,7 @@
 
         </div> 
       </div>
-
+      <%# /日程調整 - 表部分 %>
     <% end %>
   </div>
 </div>
