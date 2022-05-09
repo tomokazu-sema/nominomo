@@ -160,16 +160,21 @@
           </div>
 
           <% @possible_dates.each do |possible_date| %>
+
             <div class="d-flex">
               <div class="nomi-table-date-date h5 my-0">
                 <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
               </div>
               <div class="nomi-table-date-guestnum">
-                0
+                <%= attendances = @attendances.where(possible_date_id: possible_date.id, answer_id: 2).length %>
               </div>
               <% @guests.each do |guest| %>
                 <div class="nomi-table-date-guest">
-                  -
+                  <% if attendance = @attendances.find_by(possible_date_id: possible_date.id, guest_id: guest.id) %>
+                    <%= attendance.answer.answer %>
+                  <% else %>
+                    -
+                  <% end %>
                 </div>
               <% end %>
               <div class="nomi-table-date-btn">

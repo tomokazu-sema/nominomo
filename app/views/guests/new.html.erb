@@ -20,14 +20,17 @@
               <%= f.text_field :name, class: 'form-control mx-1 p-1' %>
             </div>
           </div>
-
+          
           <% @possible_dates.each do |possible_date| %>
             <div class="d-flex">
               <div class="nomi-table-date-date h5 my-0">
                 <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
               </div>
               <div class="nomi-table-date-guestinput bg-nomi-main">
-                -
+                <%= f.fields_for :attendances, possible_date.attendances.build do |i| %>
+                  <%= i.collection_select(:answer_id, Answer.all, :id, :answer, {}, { class: '' }) %>
+                  <%= i.hidden_field :possible_date_id, value: possible_date.id %>
+                <% end %>
               </div>
             </div>  
           <% end %>

@@ -22,6 +22,7 @@ class EventsController < ApplicationController
     @event_place = @event.event_place || EventPlace.new
     @possible_dates = @event.possible_dates.order(datetime: :ASC)
     @guests = @event.guests.order(created_at: :ASC)
+    @attendances = Attendance.includes(:guest)
   end
 
   def update

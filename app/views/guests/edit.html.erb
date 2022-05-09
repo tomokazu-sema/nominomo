@@ -28,7 +28,17 @@
                 <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
               </div>
               <div class="nomi-table-date-guestinput bg-nomi-main">
-                -
+                <% if attendance = @attendances.find_by(possible_date_id: possible_date.id) %>
+                  <%= f.fields_for :attendances, attendance do |i| %>
+                    <%= i.collection_select(:answer_id, Answer.all, :id, :answer, {}, { class: '' }) %>
+                    <%= i.hidden_field :id, value: attendance.id %>
+                  <% end %>
+                <% else %>
+                  <%= f.fields_for :attendances, possible_date.attendances.build do |i| %>
+                    <%= i.collection_select(:answer_id, Answer.all, :id, :answer, {}, { class: '' }) %>
+                    <%= i.hidden_field :possible_date_id, value: possible_date.id %>
+                  <% end %>
+                <% end %>
               </div>
             </div>  
           <% end %>

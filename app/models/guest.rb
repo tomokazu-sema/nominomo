@@ -5,4 +5,6 @@ class Guest < ApplicationRecord
   # アソシエーション
   belongs_to :event
   has_many   :attendances, dependent: :destroy
+
+  accepts_nested_attributes_for :attendances
 end
