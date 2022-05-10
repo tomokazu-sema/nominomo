@@ -5,27 +5,35 @@ class GuestsController < ApplicationController
 
   def new
     @guest = Guest.new
-    @attendances = @guest.attendances
+    set_attendances
   end
 
   def create
     @guest = Guest.new(guest_params)
-    if @guest.save
-      respond_to do |format|
+    respond_to do |format|
+      if @guest.save
         format.html { redirect_to event_path(@event) }
+      else
+        set_possible_dates
+        set_attendances
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
 
   def edit
     @guest = Guest.find(params[:id])
-    @attendances = @guest.attendances
+    set_attendances
   end
 
   def update
-    if @guest.update(guest_params)
-      respond_to do |format|
+    respond_to do |format|
+      if @guest.update(guest_params)
         format.html { redirect_to event_path(@event) }
+      else
+        set_possible_dates
+        set_attendances
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
@@ -50,6 +58,10 @@ class GuestsController < ApplicationController
 
   def set_guest
     @guest = Guest.find(params[:id])
+  end
+
+  def set_attendances
+    @attendances = @guest.attendances
   end
 
   def guest_params

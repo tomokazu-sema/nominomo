@@ -7,9 +7,11 @@ class PossibleDatesController < ApplicationController
 
   def create
     @possible_date = PossibleDate.new(possible_date_params)
-    if @possible_date.save
-      respond_to do |format|
+    respond_to do |format|
+      if @possible_date.save
         format.html { redirect_to event_path(@event) }
+      else
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
