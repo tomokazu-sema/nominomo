@@ -1,16 +1,22 @@
 <%# タイトル /////////////////////////////////////////////////// %>
 <div class="container">
-  <div class="row pt-3 mb-4 pb-4 border-bottom">
-    <div class="col"></div>
-    <h1 class="col text-center" id="title"><%= Event.find(@event.id).title %></h1>
-    <div class="col d-flex justify-content-end align-items-center">
-      <% if host_user?(@event) %>
-        <span class="me-2 btn btn-sm btn-secondary", id="open_form_title">編集</span>
-        <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "日程調整の削除は取り消せません。\n本当に削除しますか？" } }, class: 'me-2 btn btn-sm btn-secondary' %>
-      <% end %>
+  <%= turbo_frame_tag 'edit_title' do %>
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center nomi-event-width">
+        <div class="mt-1 ms-auto d-flex">
+          <% if host_user?(@event) %>
+            <%= button_to '編集', edit_event_path(@event), method: :get, class: 'btn btn-sm btn-secondary' %>
+            <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "日程調整の削除は取り消せません。\n本当に削除しますか？" } }, class: 'ms-1 btn btn-sm btn-secondary' %>
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="row h-100 mt-3 mb-2 pb-2 justify-content-center border-bottom">
+      <div class="col text-center h1"><%= @event.title %></div>
+    </div>
+  <% end %>
 
+  <!--
   <%= form_with model:@event, class: 'visually-hidden py-4 bg-nomi-main', id: 'form_title' do |f| %>
     <div class="row mb-2 pb-4 justify-content-center">
       <div class="col-4 nomi-form-width">
@@ -31,6 +37,7 @@
       </div>
     </div>
   <% end %>
+  -->
 
   <%# 開催場所 ///////////////////////////////////////////////// %>
   <div class="pt-4 mb-4">
@@ -115,7 +122,7 @@
         <div class="ms-2 mb-0 h5">開催日</div>
         <% if @event.event_date %>
           <div class="mb-1 ms-auto d-flex">
-            <%= button_to '再調整', event_possible_date_event_date_path(@event, @event.event_date.possible_date, @event.event_date), method: 'delete', class: 'btn btn-sm btn-secondary' %>
+            <%= button_to '再調整', event_possible_date_event_date_path(@event, @event.event_date.possible_date, @event.event_date), method: :delete, class: 'btn btn-sm btn-secondary' %>
           </div>
         <% end %>
       </div>
@@ -144,7 +151,7 @@
             <div class="ms-0 my-1 nomi-subhead-box"></div>
             <div class="ms-2 mb-0 h5">出欠状況</div>
             <div class="mb-1 ms-auto d-flex">
-              <%= button_to '参加者追加', new_event_guest_path(@event), method: 'get', class: 'ms-1 btn btn-sm btn-dark' %>
+              <%= button_to '参加者追加', new_event_guest_path(@event), method: :get, class: 'ms-1 btn btn-sm btn-dark' %>
             </div>
           </div>
         </div>
@@ -158,7 +165,7 @@
               <div class="nomi-table-date-guestnum">◯の数</div>
               <% @guests.each do |guest| %>
                 <div class="nomi-table-date-guest">
-                  <%= button_to guest.name, edit_event_guest_path(@event, guest), method: 'get', class: 'btn btn-sm btn-dark mx-1 px-1' %>
+                  <%= button_to guest.name, edit_event_guest_path(@event, guest), method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
                 </div>
               <% end %>
             </div>
@@ -202,9 +209,9 @@
             <div class="ms-2 mb-0 h5">日程調整</div>
             <div class="mb-1 ms-auto d-flex">
               <% if host_user?(@event) %>
-                <%= button_to '候補日追加', new_event_possible_date_path(@event), method: 'get', class: 'btn btn-sm btn-secondary' %>
+                <%= button_to '候補日追加', new_event_possible_date_path(@event), method: :get, class: 'btn btn-sm btn-secondary' %>
               <% end %>
-              <%= button_to '参加者追加', new_event_guest_path(@event), method: 'get', class: 'ms-1 btn btn-sm btn-dark' %>
+              <%= button_to '参加者追加', new_event_guest_path(@event), method: :get, class: 'ms-1 btn btn-sm btn-dark' %>
             </div>
           </div>
         </div>
@@ -219,7 +226,7 @@
               <div class="nomi-table-date-guestnum">◯の数</div>
               <% @guests.each do |guest| %>
                 <div class="nomi-table-date-guest">
-                  <%= button_to guest.name, edit_event_guest_path(@event, guest), method: 'get', class: 'btn btn-sm btn-dark mx-1 px-1' %>
+                  <%= button_to guest.name, edit_event_guest_path(@event, guest), method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
                 </div>
               <% end %>
               <% if host_user?(@event) %>
@@ -246,8 +253,8 @@
                 <% end %>
                 <% if host_user?(@event) %>
                   <div class="nomi-table-date-btn">
-                    <%= button_to '削除', event_possible_date_path(@event, possible_date), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: 'delete', class: 'btn btn-sm btn-secondary' %>
-                    <%= button_to '確定', event_possible_date_event_dates_path(@event, possible_date), method: 'post', 'data-turbo-frame': '_top', class: 'ms-1 btn btn-sm btn-secondary' %>
+                    <%= button_to '削除', event_possible_date_path(@event, possible_date), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: :delete, class: 'btn btn-sm btn-secondary' %>
+                    <%= button_to '確定', event_possible_date_event_dates_path(@event, possible_date), method: :post, 'data-turbo-frame': '_top', class: 'ms-1 btn btn-sm btn-secondary' %>
                   </div>
                 <% end %>
               </div>  

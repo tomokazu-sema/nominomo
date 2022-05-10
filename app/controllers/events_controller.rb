@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   include EventsHelper
-  before_action :set_event, only: %i[show new_guest create_guest update]
+  before_action :set_event, only: %i[show edit update new_guest create_guest]
 
   def new
     @event = Event.new
@@ -25,13 +25,17 @@ class EventsController < ApplicationController
     @attendances = Attendance.includes(:guest)
   end
 
+  def edit
+  end
+
   def update
-    messages = if @event.update(event_params_update)
-                 []
-               else
-                 @event.errors.full_messages
-               end
-    render json: { model: @event, messages: }
+    respond_to do |format|
+      if @event.update(event_params_update)
+        format.html { redirect_to event_path(@event) }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
