@@ -3,8 +3,8 @@ class EventDatesController < ApplicationController
 
   def create
     @event_date = EventDate.new(event_id: @event.id, possible_date_id: params[:possible_date_id])
-    if @event_date.save
-      respond_to do |format|
+    respond_to do |format|
+      if @event_date.save
         format.html { redirect_to event_path(@event) }
       end
     end
