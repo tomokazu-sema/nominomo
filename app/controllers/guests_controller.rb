@@ -5,6 +5,7 @@ class GuestsController < ApplicationController
 
   def new
     @guest = Guest.new
+    @attendances = @guest.attendances
   end
 
   def create
