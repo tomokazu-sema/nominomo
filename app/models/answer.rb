@@ -8,5 +8,4 @@ class Answer < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :attendances
-
 end

@@ -30,19 +30,19 @@ RSpec.describe Attendance, type: :model do
       it 'answer_idが1以上(4以下)でなければ作成できない' do
         @attendance.answer_id = 0
         @attendance.valid?
-        expect(@attendance.errors.full_messages).to include("Answer must be greater than or equal to 1")
+        expect(@attendance.errors.full_messages).to include('Answer must be greater than or equal to 1')
       end
       it 'answer_idが4以下(1以上)でなければ作成できない' do
         @attendance.answer_id = 5
         @attendance.valid?
-        expect(@attendance.errors.full_messages).to include("Answer must be less than or equal to 4")
+        expect(@attendance.errors.full_messages).to include('Answer must be less than or equal to 4')
       end
       it 'answer_idが整数でなければ作成できない' do
         tests = [0.1, 1.1, 3.9, 4.9]
         tests.each do |test|
           @attendance.answer_id = test
           @attendance.valid?
-          expect(@attendance.errors.full_messages).to include("Answer must be an integer")
+          expect(@attendance.errors.full_messages).to include('Answer must be an integer')
         end
       end
     end

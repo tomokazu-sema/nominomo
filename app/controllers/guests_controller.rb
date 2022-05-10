@@ -1,7 +1,7 @@
 class GuestsController < ApplicationController
   before_action :set_event
-  before_action :set_possible_dates, only: [:new, :edit]
-  before_action :set_guest, only: [:edit, :update]
+  before_action :set_possible_dates, only: %i[new edit]
+  before_action :set_guest, only: %i[edit update]
 
   def new
     @guest = Guest.new
@@ -65,6 +65,7 @@ class GuestsController < ApplicationController
   end
 
   def guest_params
-    params.require(:guest).permit(:name, :comment, attendances_attributes:[:id, :possible_date_id, :answer_id]).merge(event_id: Event.find_by(uid: params[:event_id]).id)
+    params.require(:guest).permit(:name, :comment,
+                                  attendances_attributes: %i[id possible_date_id answer_id]).merge(event_id: Event.find_by(uid: params[:event_id]).id)
   end
 end

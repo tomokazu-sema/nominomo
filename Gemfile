@@ -87,8 +87,8 @@ group :production do
   gem 'unicorn'
 end
 
+gem 'active_hash'
 gem 'cssbundling-rails'
 gem 'devise'
 gem 'pry-rails'
 gem 'public_uid'
-gem 'active_hash'
