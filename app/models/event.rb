@@ -15,7 +15,10 @@ class Event < ApplicationRecord
   validates :title, presence: true
 
   # アソシエーション
-  belongs_to :user, optional: true
-  has_one :host,        dependent: :destroy
-  has_one :event_place, dependent: :destroy
+  belongs_to :user,           optional: true
+  has_one    :host,           dependent: :destroy
+  has_one    :event_place,    dependent: :destroy
+  has_one    :event_date,     dependent: :destroy
+  has_many   :possible_dates, dependent: :destroy
+  has_many   :guests, dependent: :destroy
 end

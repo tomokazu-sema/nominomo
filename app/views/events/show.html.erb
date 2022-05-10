@@ -9,8 +9,8 @@
     <h1 class="col text-center" id="title"><%= Event.find(@event.id).title %></h1>
     <div class="col d-flex justify-content-end align-items-center">
       <% if host_user?(@event) %>
-        <span class="me-2 btn btn-secondary", id="open_form_title">編集</span>
-        <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "日程調整の削除は取り消せません。\n本当に削除しますか？" } }, class: 'me-2 btn btn-secondary' %>
+        <span class="me-2 btn btn-sm btn-secondary", id="open_form_title">編集</span>
+        <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "日程調整の削除は取り消せません。\n本当に削除しますか？" } }, class: 'me-2 btn btn-sm btn-secondary' %>
       <% end %>
     </div>
   </div>
@@ -52,23 +52,16 @@
         <% end %>  
       </div>
 
-      <div class="col-8 ps-0 d-flex align-items-center h5 nomi-event-width">
+      <div class="col-8 ps-0 d-flex align-items-center h3 nomi-event-width">
         <% if @event.event_place %>
-          <h5 class="ms-4"><%= @event.event_place.place %></h5>
+          <% if @event.event_place.url != '' %>
+            <%= link_to @event.event_place.place, @event.event_place.url, class: 'ms-4' %>
+          <% else %>
+            <h3 class="ms-4"><%= @event.event_place.place %></h3>
+          <% end %>
         <% else %>
           <h5 class="ms-4">未入力</h5>
         <% end %>
-      </div>
-
-      <% if @event.event_place && @event.event_place.url != '' %>
-        <% class_place_url = 'nomi-dmy' %>
-        <% place_url = @event.event_place.url %>
-      <% else %>
-        <% class_place_url = 'visually-hidden' %>
-        <% place_url = '' %>
-      <% end %>
-      <div class="col-8 ps-0 d-flex justify-content-center nomi-event-width <%= class_place_url %>">
-        <%= link_to 'お店のページに行く', place_url, class: 'btn btn-secondary' %>
       </div>
 
       <% if @event.event_place && @event.event_place.comment != '' %>
@@ -79,7 +72,7 @@
         <% place_comment = '' %>
       <% end %>
       <div class="col-8 ps-0 nomi-event-width <%= class_place_comment %>">
-        <p class="mb-0 ms-4">備考:</p>
+        <p class="mt-2 mb-0 ms-4">備考:</p>
         <div class="ms-4 border"><%= place_comment %></div>
       </div>
     </div>
@@ -103,7 +96,7 @@
           <div class="row my-4 justify-content-center">
             <div class="col-2 nomi-form-btn-width">
               <% name_submit_form_place = '作成' %>
-              <% name_submit_form_place = '編集' if @event.event_place %>
+              <% name_submit_form_place = '更新' if @event.event_place %>
               <%= f.submit name_submit_form_place, class: 'w-100 btn btn-lg btn-secondary', id: 'submit_form_place' %>
             </div>
           </div>
@@ -117,4 +110,171 @@
       
     <% end %>
   <% end %>
+
+<%# 開催日 ///////////////////////////////////////////////// %>
+  <div class="pt-4 pb-4">
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+        <div class="ms-0 my-1 nomi-subhead-box"></div>
+        <div class="ms-2 mb-0 h5">開催日</div>
+        <% if @event.event_date %>
+          <div class="mb-1 ms-auto d-flex">
+            <%= button_to '再調整', event_possible_date_event_date_path(@event, @event.event_date.possible_date, @event.event_date), method: 'delete', class: 'btn btn-sm btn-secondary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center nomi-event-width">
+        <% if @event.event_date %>
+          <div class="ms-4 mb-0 h5"><%= @event.event_date.possible_date.datetime.strftime("%m/%d %H:%M") %></div>
+        <% else %>
+          <div class="ms-4 mb-0 h5">未入力</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+
+<%# 日程調整 & 出欠状況 ///////////////////////////////////////////////// %>
+  <div class="pt-4 pb-4">
+    <%= turbo_frame_tag 'date_guest_table' do %>
+      <% if @event.event_date %>
+
+        <%# 出欠状況 - タイトル部分 %>
+        <div class="row h-100 justify-content-center">
+          <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+            <div class="ms-0 my-1 nomi-subhead-box"></div>
+            <div class="ms-2 mb-0 h5">出欠状況</div>
+            <div class="mb-1 ms-auto d-flex">
+              <%= button_to '参加者追加', new_event_guest_path(@event), method: 'get', class: 'ms-1 btn btn-sm btn-dark' %>
+            </div>
+          </div>
+        </div>
+        <%# /出欠状況 - タイトル部分 %>
+
+        <%# 出欠状況 - 表部分 %>
+        <div class="row h-100 justify-content-center">
+          <div class="col-8 mt-2 ps-0 nomi-event-width nomi-overflow-x">
+
+            <div class="d-flex">
+              <div class="nomi-table-date-guestnum">◯の数</div>
+              <% @guests.each do |guest| %>
+                <div class="nomi-table-date-guest">
+                  <%= button_to guest.name, edit_event_guest_path(@event, guest), method: 'get', class: 'btn btn-sm btn-dark mx-1 px-1' %>
+                </div>
+              <% end %>
+            </div>
+
+
+              <div class="d-flex">
+                <div class="nomi-table-date-guestnum">
+                  <%= attendances = @attendances.where(possible_date_id: @event.event_date.possible_date.id, answer_id: 2).length %>
+                </div>
+                <% @guests.each do |guest| %>
+                  <div class="nomi-table-date-guest">
+                    <% if attendance = @attendances.find_by(possible_date_id: @event.event_date.possible_date.id, guest_id: guest.id) %>
+                      <%= attendance.answer.answer %>
+                    <% else %>
+                      -
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>  
+
+
+            <div class="d-flex">
+              <div class="nomi-table-date-guestnum">コメント</div>
+              <% @guests.each do |guest| %>
+                <div class="nomi-table-date-comment">
+                  <%= safe_join(guest.comment.split("\n"), tag(:br)) %>
+                </div>
+              <% end %>
+            </div>
+
+          </div> 
+        </div>
+        <%# /出欠状況 - 表部分 %>
+
+      <% else %>
+
+        <%# 日程調整 - タイトル部分 %>
+        <div class="row h-100 justify-content-center">
+          <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+            <div class="ms-0 my-1 nomi-subhead-box"></div>
+            <div class="ms-2 mb-0 h5">日程調整</div>
+            <div class="mb-1 ms-auto d-flex">
+              <% if host_user?(@event) %>
+                <%= button_to '候補日追加', new_event_possible_date_path(@event), method: 'get', class: 'btn btn-sm btn-secondary' %>
+              <% end %>
+              <%= button_to '参加者追加', new_event_guest_path(@event), method: 'get', class: 'ms-1 btn btn-sm btn-dark' %>
+            </div>
+          </div>
+        </div>
+        <%# /日程調整 - タイトル部分 %>
+
+        <%# 日程調整 - 表部分 %>
+        <div class="row h-100 justify-content-center">
+          <div class="col-8 mt-2 ps-0 nomi-event-width nomi-overflow-x">
+
+            <div class="d-flex">
+              <div class="nomi-table-date-date">候補日時</div>
+              <div class="nomi-table-date-guestnum">◯の数</div>
+              <% @guests.each do |guest| %>
+                <div class="nomi-table-date-guest">
+                  <%= button_to guest.name, edit_event_guest_path(@event, guest), method: 'get', class: 'btn btn-sm btn-dark mx-1 px-1' %>
+                </div>
+              <% end %>
+              <% if host_user?(@event) %>
+                <div class="nomi-table-date-btn"></div>
+              <% end %>
+            </div>
+
+            <% @possible_dates.each do |possible_date| %>
+              <div class="d-flex">
+                <div class="nomi-table-date-date h5 my-0">
+                  <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
+                </div>
+                <div class="nomi-table-date-guestnum">
+                  <%= attendances = @attendances.where(possible_date_id: possible_date.id, answer_id: 2).length %>
+                </div>
+                <% @guests.each do |guest| %>
+                  <div class="nomi-table-date-guest">
+                    <% if attendance = @attendances.find_by(possible_date_id: possible_date.id, guest_id: guest.id) %>
+                      <%= attendance.answer.answer %>
+                    <% else %>
+                      -
+                    <% end %>
+                  </div>
+                <% end %>
+                <% if host_user?(@event) %>
+                  <div class="nomi-table-date-btn">
+                    <%= button_to '削除', event_possible_date_path(@event, possible_date), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: 'delete', class: 'btn btn-sm btn-secondary' %>
+                    <%= button_to '確定', event_possible_date_event_dates_path(@event, possible_date), method: 'post', 'data-turbo-frame': '_top', class: 'ms-1 btn btn-sm btn-secondary' %>
+                  </div>
+                <% end %>
+              </div>  
+            <% end %>
+
+            <div class="d-flex">
+              <div class="nomi-table-date-date">コメント</div>
+              <div class="nomi-table-date-guestnum"></div>
+              <% @guests.each do |guest| %>
+                <div class="nomi-table-date-comment">
+                  <%= safe_join(guest.comment.split("\n"), tag(:br)) %>
+                </div>
+              <% end %>
+              <% if host_user?(@event) %>
+                <div class="nomi-table-date-btn"></div>
+              <% end %>
+            </div>
+
+          </div> 
+        </div>
+        <%# /日程調整 - 表部分 %>
+
+      <% end %>
+    <% end %>
+  </div>
 </div>

@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     resources :hosts, only: :show
     get '/hosts/:id/info', to: 'hosts#info'
     resources :event_places, only: %i[create update]
+    resources :possible_dates, only: %i[new create destroy] do
+      resources :event_dates, only: %i[create destroy]
+    end
+    resources :guests, only: %i[new create edit update destroy]
   end
   get  '/events/:id/sign_in', to: 'events#new_guest'
   post '/events/:id/sign_in', to: 'events#create_guest'
