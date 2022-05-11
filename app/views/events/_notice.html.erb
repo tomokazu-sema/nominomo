@@ -1,0 +1,25 @@
+<div class="row h-100 justify-content-center">
+  <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+    <div class="ms-0 my-1 nomi-subhead-box"></div>
+    <div class="ms-2 mb-0 h5">お知らせ</div>
+    <div class="mb-1 ms-auto d-flex">
+      <% if host_user?(event) %>
+        <% if notice %>
+          <%= button_to '編集', edit_event_notice_path(event, notice), method: :get, class: 'btn btn-sm btn-secondary' %>
+        <% else %>
+          <%= button_to '作成', new_event_notice_path(event), method: :get, class: 'btn btn-sm btn-secondary' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row h-100 justify-content-center">
+  <div class="col-8 mt-2 ps-0 nomi-event-width">
+    <% if notice && notice.message != '' %>
+      <div class="ms-3 p-2 h5 bg-nomi-main"><%= safe_join(notice.message.split("\n"), tag(:br)) %></div>
+    <% else %>
+      <div class="ms-4 h5">お知らせはありません</div>
+    <% end %>
+  </div>
+</div>
