@@ -25,8 +25,7 @@ class EventsController < ApplicationController
     @guests = @event.guests.order(created_at: :ASC)
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     respond_to do |format|
