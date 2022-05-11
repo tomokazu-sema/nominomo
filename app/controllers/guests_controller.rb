@@ -1,11 +1,11 @@
 class GuestsController < ApplicationController
   before_action :set_event
+  before_action :set_event_date, only: %i[new edit]
   before_action :set_possible_dates, only: %i[new edit]
   before_action :set_guest, only: %i[edit update]
 
   def new
     @guest = Guest.new
-    set_attendances
   end
 
   def create
@@ -15,7 +15,6 @@ class GuestsController < ApplicationController
         format.html { redirect_to event_path(@event) }
       else
         set_possible_dates
-        set_attendances
         format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -23,7 +22,6 @@ class GuestsController < ApplicationController
 
   def edit
     @guest = Guest.find(params[:id])
-    set_attendances
   end
 
   def update
@@ -32,7 +30,6 @@ class GuestsController < ApplicationController
         format.html { redirect_to event_path(@event) }
       else
         set_possible_dates
-        set_attendances
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
@@ -52,16 +49,16 @@ class GuestsController < ApplicationController
     @event = Event.find_by(uid: params[:event_id])
   end
 
+  def set_event_date
+    @event_date = @event.event_date
+  end
+
   def set_possible_dates
-    @possible_dates = @event.possible_dates.order(datetime: :ASC)
+    @possible_dates = @event.possible_dates.includes(:attendances).order(datetime: :ASC)
   end
 
   def set_guest
     @guest = Guest.find(params[:id])
-  end
-
-  def set_attendances
-    @attendances = @guest.attendances
   end
 
   def guest_params

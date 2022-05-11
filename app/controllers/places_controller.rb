@@ -1,6 +1,6 @@
 class PlacesController < ApplicationController
   before_action :set_event
-  before_action :set_place, only: [:edit, :update]
+  before_action :set_place, only: %i[edit update]
 
   def new
     @place = Place.new
@@ -17,8 +17,7 @@ class PlacesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     respond_to do |format|
