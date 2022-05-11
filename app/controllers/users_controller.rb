@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(uid: params[:id])
+    @events = @user.events.includes(:host)
   end
 
   private
