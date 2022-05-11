@@ -66,6 +66,6 @@ class GuestsController < ApplicationController
 
   def guest_params
     params.require(:guest).permit(:name, :comment,
-                                  attendances_attributes: %i[id possible_date_id answer_id]).merge(event_id: Event.find_by(uid: params[:event_id]).id)
+                                  attendances_attributes: %i[id possible_date_id answer_id]).merge(event_id: @event.id)
   end
 end

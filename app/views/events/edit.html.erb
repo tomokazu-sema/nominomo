@@ -1,0 +1,21 @@
+<div class="container">
+  <%= turbo_frame_tag 'edit_title' do %>
+    <%= form_with model: @event do |f| %>
+      <div class="row h-100 justify-content-center">
+        <div class="col-8 mt-2 ps-0 d-flex align-items-center nomi-event-width">
+          <div class="mt-1 ms-auto d-flex">
+            <% if host_user?(@event) %>
+              <%= link_to '戻る', event_path(@event), class: 'btn btn-sm btn-secondary' %>
+              <%= f.submit '更新', class: 'ms-1 btn btn-sm btn-secondary' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="row h-100 mt-3 mb-2 pb-2 justify-content-center border-bottom">
+        <div class="col-6 text-center">
+          <%= f.text_field :title, class: 'form-control py-3' %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

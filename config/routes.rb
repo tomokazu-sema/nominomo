@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   # root "articles#index"
   root to: 'pages#index'
   resources :users, only: :show
-  resources :events, only: %i[new create show update destroy] do
+  resources :events, only: %i[new create show edit update destroy] do
     resources :hosts, only: :show
     get '/hosts/:id/info', to: 'hosts#info'
-    resources :event_places, only: %i[create update]
+    resources :places, only: %i[new create edit update]
     resources :possible_dates, only: %i[new create destroy] do
       resources :event_dates, only: %i[create destroy]
     end

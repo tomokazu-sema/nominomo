@@ -5,7 +5,9 @@
       <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
         <div class="ms-0 my-1 nomi-subhead-box"></div>
         <div class="ms-2 mb-0 h5">日程調整</div>
-        <%= link_to '戻る', event_path(@event), 'data-turbo-frame': 'date_guest_table', class: 'mb-1 ms-auto btn btn-sm btn-secondary' %>
+        <div class="mb-1 ms-auto">
+          <%= button_to '戻る', event_path(@event), method: :get, class: 'btn btn-sm btn-secondary' %>
+        </div>
       </div>
     </div>
 
@@ -16,7 +18,7 @@
           <%= render "shared/error_messages", resource: f.object %>
 
           <div class="w-50 mt-2">
-            <%= f.label :datetime, '開催場所' %>
+            <%= f.label :datetime, '候補日' %>
             <%= f.datetime_field :datetime, class: 'form-control' %>
           </div>
         

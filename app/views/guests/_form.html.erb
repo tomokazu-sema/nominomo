@@ -8,9 +8,9 @@
           <div class="ms-0 my-1 nomi-subhead-box"></div>
           <div class="ms-2 mb-0 h5">出欠状況</div>
           <div class="mb-1 ms-auto d-flex">
-            <%= button_to '戻る', event_path(event), method: 'get', class: 'btn btn-sm btn-dark' %>
+            <%= button_to '戻る', event_path(event), method: :get, class: 'btn btn-sm btn-dark' %>
             <% if guest.id %>
-              <%= button_to '削除', event_guest_path(event, guest), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: 'delete', class: 'ms-1 btn btn-sm btn-dark' %>
+              <%= button_to '削除', event_guest_path(event, guest), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: :delete, class: 'ms-1 btn btn-sm btn-dark' %>
             <% end %>
           </div>
         </div>
@@ -79,9 +79,9 @@
           <div class="ms-0 my-1 nomi-subhead-box"></div>
           <div class="ms-2 mb-0 h5">日程調整</div>
           <div class="mb-1 ms-auto d-flex">
-            <%= button_to '戻る', event_path(event), method: 'get', class: 'btn btn-sm btn-dark' %>
+            <%= button_to '戻る', event_path(event), method: :get, class: 'btn btn-sm btn-dark' %>
             <% if guest.id %>
-              <%= button_to '削除', event_guest_path(event, guest), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: 'delete', class: 'ms-1 btn btn-sm btn-dark' %>
+              <%= button_to '削除', event_guest_path(event, guest), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: :delete, class: 'ms-1 btn btn-sm btn-dark' %>
             <% end %>
           </div>
         </div>
