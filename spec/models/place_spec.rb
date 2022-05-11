@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EventPlace, type: :model do
+RSpec.describe Place, type: :model do
   before do
     @place = FactoryBot.build(:place)
   end

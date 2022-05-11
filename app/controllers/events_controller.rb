@@ -19,7 +19,7 @@ class EventsController < ApplicationController
 
   def show
     move_to_new_guest if @event.password_digest
-    @place = @event.place || Place.new
+    @place = @event.place
     @possible_dates = @event.possible_dates.order(datetime: :ASC)
     @guests = @event.guests.order(created_at: :ASC)
     @attendances = Attendance.includes(:guest)
