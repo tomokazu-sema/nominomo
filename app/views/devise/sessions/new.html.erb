@@ -1,7 +1,7 @@
 <div class="form-main">
   <div class="text-center form-signin">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
-      <h1 class="h3 mb-5 fw-normal">ログイン</h1>
+      <div class="h3 mb-5 fw-normal">ログイン</div>
 
       <div class="text-danger">
         <%= flash[:alert] %>
@@ -17,8 +17,6 @@
       </div>
 
       <%= f.submit 'ログイン', class: 'w-100 btn btn-lg btn-secondary' %>
-
-      <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
     <% end %>
   </div>
 </div>

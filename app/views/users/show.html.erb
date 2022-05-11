@@ -1,13 +1,41 @@
 <div class="container">
-  <div class="row pt-3 mb-4 pb-4 border-bottom">
-    <div class="col"></div>
-    <h1 class="col text-center"><%= @user.name %></h1>
-    <div class="col d-flex align-items-center">
-      <%= link_to '編集', edit_user_registration_path(@user), class: 'btn btn-secondary' %>
+  <div class="row h-100 justify-content-center">
+    <div class="col-8 mt-2 ps-0 d-flex align-items-center nomi-event-width">
+      <div class="mt-1 ms-auto d-flex">
+        <%= button_to '編集', edit_user_registration_path(@user), method: :get, class: 'btn btn-sm btn-secondary' %>
+      </div>
     </div>
   </div>
-  <div class="row justify-content-center">
+  <div class="row h-100 mt-3 mb-2 pb-2 justify-content-center border-bottom">
+    <div class="col text-center h1"><%= @user.name %></div>
+  </div>
+
+  <div class="row justify-content-center mt-5 mb-2">
     <%= link_to '日程調整を作成する', new_event_path, class: 'col-6 btn btn-lg btn-danger' %>
+  </div>
+
+  <div class="pt-4 pb-4">
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+        <div class="ms-0 my-1 nomi-subhead-box"></div>
+        <div class="ms-2 mb-0 h5">日程調整一覧</div>
+      </div>
+    </div>
+
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 nomi-event-width">
+        <% if @events.empty? %>
+          <div class="ms-4 mb-0 h5">日程調整は作成されていません</div>
+        <% else %>
+          <% @events.each do |event| %>
+            <div class="ms-4 my-3 p-2 border">
+              <%= link_to event.title, event_path(event), class: 'h3' %>
+              <%= button_to '主催者ページ', "/events/#{event.uid}/hosts/#{event.host.uid}/info", method: :get, class: 'mt-1 btn btn-sm btn-secondary' %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
   
 </div>

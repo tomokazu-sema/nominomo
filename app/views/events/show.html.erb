@@ -7,7 +7,7 @@
         <div class="mt-1 ms-auto d-flex">
           <% if host_user?(@event) %>
             <%= button_to '編集', edit_event_path(@event), method: :get, class: 'btn btn-sm btn-secondary' %>
-            <%= button_to "削除", event_path(@event), method: :delete, form: { data: { turbo_confirm: "日程調整の削除は取り消せません。\n本当に削除しますか？" } }, class: 'ms-1 btn btn-sm btn-secondary' %>
+            <%= button_to "削除", event_path(@event), method: :delete, 'data-turbo-frame': '_top', form: { data: { turbo_confirm: "日程調整の削除は取り消せません。\n本当に削除しますか？" } }, class: 'ms-1 btn btn-sm btn-secondary' %>
           <% end %>
         </div>
       </div>
