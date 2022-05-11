@@ -20,9 +20,7 @@ class GuestsController < ApplicationController
     end
   end
 
-  def edit
-    @guest = Guest.find(params[:id])
-  end
+  def edit; end
 
   def update
     respond_to do |format|

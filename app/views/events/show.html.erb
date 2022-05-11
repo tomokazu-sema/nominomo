@@ -29,6 +29,13 @@
     <% end %>
   </div>
 
+  <%# お知らせ ///////////////////////////////////////////////// %>
+  <div class="pt-4 mb-4">
+    <%= turbo_frame_tag 'notice' do %>
+      <%= render partial: 'notice', locals: { event: @event, notice: @notice } %>
+    <% end %>
+  </div>
+
   <%# 日程調整 & 出欠状況 ///////////////////////////////////////////////// %>
   <div class="pt-4 pb-4">
     <%= turbo_frame_tag 'date_guest_table' do %>

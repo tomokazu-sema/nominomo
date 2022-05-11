@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :event_dates, only: %i[create destroy]
     end
     resources :guests, only: %i[new create edit update destroy]
+    resources :notices, only: %i[new create edit update]
   end
   get  '/events/:id/sign_in', to: 'events#new_guest'
   post '/events/:id/sign_in', to: 'events#create_guest'

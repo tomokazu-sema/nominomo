@@ -23,6 +23,7 @@ class EventsController < ApplicationController
     @possible_dates = @event.possible_dates.includes(:attendances).order(datetime: :ASC)
     @event_date = @event.event_date
     @guests = @event.guests.order(created_at: :ASC)
+    @notice = @event.notice
   end
 
   def edit; end
