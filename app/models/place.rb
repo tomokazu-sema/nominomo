@@ -1,4 +1,4 @@
-class EventPlace < ApplicationRecord
+class Place < ApplicationRecord
   # バリデーション
   validates :place, presence: true
 
