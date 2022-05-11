@@ -3,60 +3,95 @@
 <% end %>
 
 <div class="container">
-  <div class="row pt-4 mb-4 pb-2 justify-content-center">
-    <div class="col"></div>
-    <div class="col-6">
-      <h1 class="h3 text-center">主催者ページ</h1>
+  <div class="row h-100 justify-content-center">
+    <div class="row h-100 mt-3 mb-2 pb-2 justify-content-center border-bottom">
+      <div class="col text-center h3">主催者ページ</div>
     </div>
-    <div class="col"></div>
   </div>
 
-  <div class="mb-5">
-    <div class="row mb-2 justify-content-center nomi-subhead">
-      <div class="col-8 h-100 ps-0 d-flex align-items-center border-bottom h5 nomi-event-width">
+  <%# ブックマーク %>
+  <div class="pt-4 pb-4">
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
         <div class="ms-0 my-1 nomi-subhead-box"></div>
-        <h5 class="ms-2 mb-0">イベントページURL</h5>
+        <div class="ms-2 mb-0 h5">このページをブックマークしてください</div>
       </div>
     </div>
 
-    <div class="row mb-2 py-2 justify-content-center">
-      <div class="col-6 nomi-event-width">
-        コピーして参加者に送りましょう
-        <div class="mt-2 d-flex align-items-center">
-          <span class="bi bi-files nomi-copy-btn" type="button" id="copy_btn_guest"></span>
-          <p class="ms-3 mb-0 nomi-overflow-x" id="url_guest">
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 py-2 ps-0 nomi-event-width">
+          <div class="ms-4 mb-0">参加者には下記のURLを連絡してください。</div>
+      </div>
+    </div>
+  </div>
+  <%# /ブックマーク %>
+
+  <%# Cookieについて %>
+  <div class="pt-4 pb-4">
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+        <div class="ms-0 my-1 nomi-subhead-box"></div>
+        <div class="ms-2 mb-0 h5">本サイトではCookieを利用しています</div>
+      </div>
+    </div>
+
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 nomi-event-width">
+        <div class="ms-4 mb-0">ブラウザの設定でCookieをブロックしている場合は、ブロックの解除をお願いします。</div>
+      </div>
+    </div>
+  </div>
+  <%# /Cookieについて %>
+
+  <%# 参加者用 %>
+  <div class="pt-4 pb-4">
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+        <div class="ms-0 my-1 nomi-subhead-box"></div>
+        <div class="ms-2 mb-0 h5">日程調整ページURL</div>
+      </div>
+    </div>
+
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 nomi-event-width">
+        <div class="ms-4 mb-0 h5">コピーして参加者に送りましょう。</div>
+        <div class="ms-4 mt-2 d-flex align-items-center">
+          <span class="bi bi-files nomi-copy-btn" type="button" id="copy_btn_host"></span>
+          <p class="ms-3 mb-0 nomi-overflow-x" id="url_host">
             <%= "http://#{request.domain}/events/#{@event.uid}" %>
           </p>
         </div>
-      </div>
-    </div>
-
-    <div class="row mb-2 pb-2 justify-content-center">
-      <div class="col-6 nomi-event-width">
-        <%= link_to 'イベントページへ行く', event_path(@event), data: { turbo: false },class: 'w-100 btn btn-lg btn-secondary' %>
+        <div class="ms-4 mt-2 d-flex justify-content-center">
+          <%= link_to 'イベントページへ行く', event_path(@event), data: { turbo: false },class: 'w-50 btn btn-lg btn-secondary' %>
+        </div>
       </div>
     </div>
   </div>
+  <%# /参加者用 %>
 
-  <div class="mb-5">
-    <div class="row mb-2 justify-content-center nomi-subhead">
-      <div class="col-8 h-100 ps-0 d-flex align-items-center border-bottom h5 nomi-event-width">
+  <%# 主催者用 %>
+  <div class="pt-4 pb-4">
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
         <div class="ms-0 my-1 nomi-subhead-box"></div>
-        <h5 class="ms-2 mb-0">主催者用イベントページURL</h5>
+        <div class="ms-2 mb-0 h5">主催者用 日程調整ページURL</div>
       </div>
     </div>
 
-
-    <div class="row mb-2 py-2 justify-content-center">
-      <div class="col-6 nomi-event-width">
-        コピーして他の主催者に送りましょう
-        <div class="mt-2 d-flex align-items-center">
-          <span class="bi bi-files nomi-copy-btn" type="button" id="copy_btn_host"></span>
-          <p class="ms-3 mb-0 nomi-overflow-x" id="url_host">
+    <div class="row h-100 pb-5 justify-content-center">
+      <div class="col-8 mt-2 ps-0 nomi-event-width">
+        <div class="ms-4 mb-0 h5">他に主催者がいる場合、</div>
+        <div class="ms-4 mb-2 h5">コピーして他の主催者に送りましょう。</div>
+        <div class="ms-4 mb-0">日程調整ページの各種編集機能をご利用になれます。</div>
+        <div class="ms-4 mt-2 d-flex align-items-center">
+          <span class="bi bi-files nomi-copy-btn" type="button" id="copy_btn_guest"></span>
+          <p class="ms-3 mb-0 nomi-overflow-x" id="url_guest">
             <%= "http://#{request.domain}/events/#{@event.uid}/hosts/#{@event.host.uid}" %>
           </p>
         </div>
       </div>
     </div>
   </div>
+  <%# /主催者用 %>
+
 </div>
