@@ -1,0 +1,125 @@
+<% if event_date %>
+
+  <%# 出欠状況 - タイトル部分 %>
+  <div class="row h-100 justify-content-center">
+    <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+      <div class="ms-0 my-1 nomi-subhead-box"></div>
+      <div class="ms-2 mb-0 h5">出欠状況</div>
+      <div class="mb-1 ms-auto d-flex">
+        <%= button_to '参加者追加', new_event_guest_path(event), method: :get, class: 'ms-1 btn btn-sm btn-dark' %>
+      </div>
+    </div>
+  </div>
+  <%# /出欠状況 - タイトル部分 %>
+
+  <%# 出欠状況 - 表部分 %>
+  <div class="row h-100 justify-content-center">
+    <div class="col-8 mt-2 ps-0 nomi-event-width nomi-overflow-x">
+
+      <div class="ms-4 d-flex">
+        <div class="nomi-table-date-guestnum">◯の数</div>
+        <% guests.each do |guest| %>
+          <div class="nomi-table-date-guest">
+            <%= button_to guest.name, edit_event_guest_path(event, guest), method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="ms-4 d-flex">
+        <div class="nomi-table-date-guestnum mb-0 h5">
+          <%= event_date.possible_date.count_attendance_answer(2) %>
+        </div>
+        <% guests.each do |guest| %>
+          <div class="nomi-table-date-guest mb-0 h5 fw-bold">
+            <%= event_date.possible_date.attendance_answer(guest) %>
+          </div>
+        <% end %>
+      </div>  
+
+      <div class="ms-4 d-flex">
+        <div class="nomi-table-date-guestnum">コメント</div>
+        <% guests.each do |guest| %>
+          <div class="nomi-table-date-comment">
+            <%= safe_join(guest.comment.split("\n"), tag(:br)) %>
+          </div>
+        <% end %>
+      </div>
+
+    </div> 
+  </div>
+  <%# /出欠状況 - 表部分 %>
+
+<% else %>
+
+  <%# 日程調整 - タイトル部分 %>
+  <div class="row h-100 justify-content-center">
+    <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+      <div class="ms-0 my-1 nomi-subhead-box"></div>
+      <div class="ms-2 mb-0 h5">日程調整</div>
+      <div class="mb-1 ms-auto d-flex">
+        <% if host_user?(event) %>
+          <%= button_to '候補日追加', new_event_possible_date_path(event), method: :get, class: 'btn btn-sm btn-secondary' %>
+        <% end %>
+        <%= button_to '参加者追加', new_event_guest_path(event), method: :get, class: 'ms-1 btn btn-sm btn-dark' %>
+      </div>
+    </div>
+  </div>
+  <%# /日程調整 - タイトル部分 %>
+
+  <%# 日程調整 - 表部分 %>
+  <div class="row h-100 justify-content-center">
+    <div class="col-8 mt-2 ps-0 nomi-event-width nomi-overflow-x">
+
+      <div class="ms-4 d-flex">
+        <div class="nomi-table-date-date">候補日時</div>
+        <div class="nomi-table-date-guestnum">◯の数</div>
+        <% guests.each do |guest| %>
+          <div class="nomi-table-date-guest">
+            <%= button_to guest.name, edit_event_guest_path(event, guest), method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
+          </div>
+        <% end %>
+        <% if host_user?(event) %>
+          <div class="nomi-table-date-btn"></div>
+        <% end %>
+      </div>
+
+      <% possible_dates.each do |possible_date| %>
+        <div class="ms-4 d-flex">
+          <div class="nomi-table-date-date h5 my-0">
+            <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
+          </div>
+          <div class="nomi-table-date-guestnum mb-0 h5">
+            <%= possible_date.count_attendance_answer(2) %>
+          </div>
+          <% guests.each do |guest| %>
+            <div class="nomi-table-date-guest mb-0 h5 fw-bold">
+              <%= possible_date.attendance_answer(guest) %>
+            </div>
+          <% end %>
+          <% if host_user?(@event) %>
+            <div class="nomi-table-date-btn">
+              <%= button_to '削除', event_possible_date_path(event, possible_date), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: :delete, class: 'btn btn-sm btn-secondary' %>
+              <%= button_to '確定', event_possible_date_event_dates_path(event, possible_date), method: :post, 'data-turbo-frame': '_top', class: 'ms-1 btn btn-sm btn-secondary' %>
+            </div>
+          <% end %>
+        </div>  
+      <% end %>
+
+      <div class="ms-4 d-flex">
+        <div class="nomi-table-date-date">コメント</div>
+        <div class="nomi-table-date-guestnum"></div>
+        <% guests.each do |guest| %>
+          <div class="nomi-table-date-comment">
+            <%= safe_join(guest.comment.split("\n"), tag(:br)) %>
+          </div>
+        <% end %>
+        <% if host_user?(event) %>
+          <div class="nomi-table-date-btn"></div>
+        <% end %>
+      </div>
+
+    </div> 
+  </div>
+  <%# /日程調整 - 表部分 %>
+
+<% end %>
