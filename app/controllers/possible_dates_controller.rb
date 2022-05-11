@@ -31,6 +31,6 @@ class PossibleDatesController < ApplicationController
   end
 
   def possible_date_params
-    params.require(:possible_date).permit(:datetime).merge(event_id: Event.find_by(uid: params[:event_id]).id)
+    params.require(:possible_date).permit(:datetime).merge(event_id: @event.id)
   end
 end

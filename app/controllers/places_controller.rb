@@ -41,7 +41,6 @@ class PlacesController < ApplicationController
   end
 
   def place_params
-    params.require(:place).permit(:place, :url,
-                                  :comment).merge(event_id: Event.find_by(uid: params[:event_id]).id)
+    params.require(:place).permit(:place, :url, :comment).merge(event_id: @event.id)
   end
 end
