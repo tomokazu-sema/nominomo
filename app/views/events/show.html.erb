@@ -23,18 +23,18 @@
       <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
         <div class="ms-0 my-1 nomi-subhead-box"></div>
         <div class="ms-2 mb-0 h5">開催日</div>
-        <% if @event.event_date %>
-          <div class="mb-1 ms-auto d-flex">
-            <%= button_to '再調整', event_possible_date_event_date_path(@event, @event.event_date.possible_date, @event.event_date), method: :delete, class: 'btn btn-sm btn-secondary' %>
-          </div>
-        <% end %>
+        <div class="mb-1 ms-auto d-flex">
+          <% if host_user?(@event) && @event_date %>
+            <%= button_to '再調整', event_possible_date_event_date_path(@event, @event_date.possible_date, @event_date), method: :delete, class: 'btn btn-sm btn-secondary' %>
+          <% end %>        
+        </div>
       </div>
     </div>
 
     <div class="row h-100 justify-content-center">
       <div class="col-8 mt-2 ps-0 d-flex align-items-center nomi-event-width">
-        <% if @event.event_date %>
-          <div class="ms-4 mb-0 h5"><%= @event.event_date.possible_date.datetime.strftime("%m/%d %H:%M") %></div>
+        <% if @event_date %>
+          <div class="ms-4 mb-0 h5"><%= @event_date.possible_date.datetime.strftime("%m/%d %H:%M") %></div>
         <% else %>
           <div class="ms-4 mb-0 h5">未調整</div>
         <% end %>
@@ -50,10 +50,12 @@
           <div class="ms-0 my-1 nomi-subhead-box"></div>
           <div class="ms-2 mb-0 h5">開催場所</div>
           <div class="mb-1 ms-auto d-flex">
-            <% if @place %>
-              <%= button_to '編集', edit_event_place_path(@event, @place), method: :get, class: 'btn btn-sm btn-secondary' %>
-            <% else %>
-              <%= button_to '作成', new_event_place_path(@event), method: :get, class: 'btn btn-sm btn-secondary' %>
+            <% if host_user?(@event) %>
+              <% if @place %>
+                <%= button_to '編集', edit_event_place_path(@event, @place), method: :get, class: 'btn btn-sm btn-secondary' %>
+              <% else %>
+                <%= button_to '作成', new_event_place_path(@event), method: :get, class: 'btn btn-sm btn-secondary' %>
+              <% end %>
             <% end %>
           </div>
         </div>

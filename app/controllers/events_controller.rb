@@ -21,6 +21,7 @@ class EventsController < ApplicationController
     move_to_new_guest if @event.password_digest
     @place = @event.place
     @possible_dates = @event.possible_dates.order(datetime: :ASC)
+    @event_date = @event.event_date
     @guests = @event.guests.order(created_at: :ASC)
     @attendances = Attendance.includes(:guest)
   end
