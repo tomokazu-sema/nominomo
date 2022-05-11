@@ -17,9 +17,12 @@
           
           <%= render "shared/error_messages", resource: f.object %>
 
-          <div class="w-50 mt-2">
+          <div class="w-50 mt-2">         
+            <% t = Time.zone.now %>
+            <% default_datetime = Time.parse("#{t.year}/#{t.mon}/#{t.day} 19:00") %>
+
             <%= f.label :datetime, '候補日' %>
-            <%= f.datetime_field :datetime, class: 'form-control' %>
+            <%= f.datetime_field :datetime, value: default_datetime.strftime('%Y-%m-%dT%T'), class: 'form-control' %>
           </div>
         
           <%= f.submit '追加', class: 'w-25 mt-2 btn btn-lg btn-secondary' %>
