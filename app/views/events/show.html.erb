@@ -116,22 +116,16 @@
               <% end %>
             </div>
 
-
-              <div class="ms-4 d-flex">
-                <div class="nomi-table-date-guestnum">
-                  <%= attendances = @attendances.where(possible_date_id: @event.event_date.possible_date.id, answer_id: 2).length %>
+            <div class="ms-4 d-flex">
+              <div class="nomi-table-date-guestnum">
+                <%= @event_date.possible_date.count_attendance_answer(2) %>
+              </div>
+              <% @guests.each do |guest| %>
+                <div class="nomi-table-date-guest">
+                  <%= @event_date.possible_date.attendance_answer(guest) %>
                 </div>
-                <% @guests.each do |guest| %>
-                  <div class="nomi-table-date-guest">
-                    <% if attendance = @attendances.find_by(possible_date_id: @event.event_date.possible_date.id, guest_id: guest.id) %>
-                      <%= attendance.answer.answer %>
-                    <% else %>
-                      -
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>  
-
+              <% end %>
+            </div>  
 
             <div class="ms-4 d-flex">
               <div class="nomi-table-date-guestnum">コメント</div>
@@ -186,15 +180,11 @@
                   <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
                 </div>
                 <div class="nomi-table-date-guestnum">
-                  <%= attendances = @attendances.where(possible_date_id: possible_date.id, answer_id: 2).length %>
+                  <%= possible_date.count_attendance_answer(2) %>
                 </div>
                 <% @guests.each do |guest| %>
                   <div class="nomi-table-date-guest">
-                    <% if attendance = @attendances.find_by(possible_date_id: possible_date.id, guest_id: guest.id) %>
-                      <%= attendance.answer.answer %>
-                    <% else %>
-                      -
-                    <% end %>
+                    <%= possible_date.attendance_answer(guest) %>
                   </div>
                 <% end %>
                 <% if host_user?(@event) %>

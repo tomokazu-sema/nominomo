@@ -33,18 +33,18 @@
 
             <div class="d-flex">
               <div class="nomi-table-date-date h5 my-0">
-                <%= @event.event_date.possible_date.datetime.strftime("%m/%d %H:%M") %>
+                <%= @event_date.possible_date.datetime.strftime("%m/%d %H:%M") %>
               </div>
               <div class="nomi-table-date-guestinput bg-nomi-main">
-                <% if attendance = attendances.find_by(possible_date_id: @event.event_date.possible_date_id) %>
+                <% if attendance = @event_date.possible_date.attendance(guest) %>
                   <%= f.fields_for :attendances, attendance do |i| %>
                     <%= i.collection_select(:answer_id, Answer.all, :id, :answer, {}, { class: '' }) %>
                     <%= i.hidden_field :id, value: attendance.id %>
                   <% end %>
                 <% else %>
-                  <%= f.fields_for :attendances, @event.event_date.possible_date.attendances.build do |i| %>
+                  <%= f.fields_for :attendances, @event_date.possible_date.attendances.build do |i| %>
                     <%= i.collection_select(:answer_id, Answer.all, :id, :answer, {}, { class: '' }) %>
-                    <%= i.hidden_field :possible_date_id, value: @event.event_date.possible_date_id %>
+                    <%= i.hidden_field :possible_date_id, value: @event_date.possible_date_id %>
                   <% end %>
                 <% end %>
               </div>
@@ -108,7 +108,7 @@
                   <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
                 </div>
                 <div class="nomi-table-date-guestinput bg-nomi-main">
-                  <% if attendance = attendances.find_by(possible_date_id: possible_date.id) %>
+                  <% if attendance = possible_date.attendance(guest) %>
                     <%= f.fields_for :attendances, attendance do |i| %>
                       <%= i.collection_select(:answer_id, Answer.all, :id, :answer, {}, { class: '' }) %>
                       <%= i.hidden_field :id, value: attendance.id %>
