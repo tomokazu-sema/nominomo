@@ -18,40 +18,22 @@
   <% end %>
 
   <%# 開催日 ///////////////////////////////////////////////// %>
-  <div class="pt-4 pb-4">
-    <%= render partial: 'event_date', locals: { event: @event, event_date: @event_date } %>
-  </div>
-
+  <%= render partial: 'event_date', locals: { event: @event, event_date: @event_date } %>
+  
   <%# 開催場所 ///////////////////////////////////////////////// %>
-  <div class="pt-4 mb-4">
-    <%= turbo_frame_tag 'place' do %>
-      <%= render partial: 'place', locals: { event: @event, place: @place } %>
-    <% end %>
-  </div>
-
+  <%= render partial: 'place', locals: { event: @event, place: @place } %>
+    
   <%# お知らせ ///////////////////////////////////////////////// %>
-  <div class="pt-4 mb-4">
-    <%= turbo_frame_tag 'notice' do %>
-      <%= render partial: 'notice', locals: { event: @event, notice: @notice } %>
-    <% end %>
-  </div>
-
+  <%= render partial: 'notice', locals: { event: @event, notice: @notice } %>
+    
   <%# guestの更新をリアルタイムで反映させるためのturbo_frame_tag %>
   <%= turbo_frame_tag 'guest' do %>
 
     <%# 日程調整 & 出欠状況 ///////////////////////////////////////////////// %>
-    <div class="pt-4 pb-4">
-      <%= turbo_frame_tag 'date_guest_table' do %>
-        <%= render partial: 'date_guest_table', locals: { event: @event, event_date: @event_date, possible_dates: @possible_dates, guests: @guests } %>
-      <% end %>
-    </div>
-
+    <%= render partial: 'date_guest_table', locals: { event: @event, event_date: @event_date, possible_dates: @possible_dates, guests: @guests } %>
+      
     <%# アンケート ///////////////////////////////////////////////// %>
-    <div class="pt-4 mb-4">
-      <%= turbo_frame_tag 'question' do %>
-        <%= render partial: 'question', locals: { event: @event, guests: @guests, questions: @questions } %>
-      <% end %>
-    </div>
+     <%= render partial: 'question', locals: { event: @event, guests: @guests, questions: @questions } %>  
 
   <% end %>
 

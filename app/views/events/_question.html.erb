@@ -1,60 +1,64 @@
-<div class="row h-100 justify-content-center">
-  <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
-    <div class="ms-0 my-1 nomi-subhead-box"></div>
-    <div class="ms-2 mb-0 h5">アンケート</div>
-    <div class="mb-1 ms-auto d-flex">
-      <% if host_user?(event) %>
-        <%= button_to '作成', new_event_question_path(event), method: :get, class: 'btn btn-sm btn-secondary' %>
-      <% end %>
+<div class="pt-4 mb-4">
+  <%= turbo_frame_tag 'question' do %>
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+        <div class="ms-0 my-1 nomi-subhead-box"></div>
+        <div class="ms-2 mb-0 h5">アンケート</div>
+        <div class="mb-1 ms-auto d-flex">
+          <% if host_user?(event) %>
+            <%= button_to '作成', new_event_question_path(event), method: :get, class: 'btn btn-sm btn-secondary' %>
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<div class="row h-100 justify-content-center">
-  <div class="col-8 mt-2 ps-0 nomi-event-width">
-    <% if questions.empty? %>
-      <div class="ms-4">アンケートはありません</div>
-    <% else %>
-      <% questions.each do |question| %>
-        <div class="ms-4 my-3 p-2 border">
-          <div class="border-bottom d-flex">
-            <div class="ms-2 mb-0 h3"><%= question.title %></div>
-            <div class="mb-1 ms-auto d-flex">
-              <%= button_to '編集', edit_event_question_path(event, question), method: :get, class: 'btn btn-sm btn-secondary' %>
-              <%= button_to '削除', event_question_path(event, question), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: :delete, class: 'ms-1 btn btn-sm btn-secondary' %>
-            </div>
-          </div>
-          <div class="p-3"><%= safe_join(question.content.split("\n"), tag(:br)) %></div>
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 ps-0 nomi-event-width">
+        <% if questions.empty? %>
+          <div class="ms-4">アンケートはありません</div>
+        <% else %>
+          <% questions.each do |question| %>
+            <div class="ms-4 my-3 p-2 border">
+              <div class="border-bottom d-flex">
+                <div class="ms-2 mb-0 h3"><%= question.title %></div>
+                <div class="mb-1 ms-auto d-flex">
+                  <%= button_to '編集', edit_event_question_path(event, question), method: :get, class: 'btn btn-sm btn-secondary' %>
+                  <%= button_to '削除', event_question_path(event, question), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: :delete, class: 'ms-1 btn btn-sm btn-secondary' %>
+                </div>
+              </div>
+              <div class="p-3"><%= safe_join(question.content.split("\n"), tag(:br)) %></div>
 
-          <%# アンケート回答表 %>
-          <div class="nomi-overflow-x">
-            <div class="d-flex">
-              <% guests.each do |guest| %>
-              <% question_answer = question.question_answer(guest) %>
-                <div>
-                  <%= turbo_frame_tag "question_answer_#{guest.id}" do %>
-                    <% if question_answer %>
-                      <div class="nomi-table-question-guest">
-                        <%= button_to guest.name, edit_event_question_question_answer_path(event, question, question_answer), params: { guest_id: guest.id }, method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
-                      </div>
-                      <div class="nomi-table-question-answer p-1">
-                        <%= safe_join(question_answer.answer.split("\n"), tag(:br)) %>
-                      </div>
-                    <% else %>
-                      <div class="nomi-table-question-guest">
-                        <%= button_to guest.name, new_event_question_question_answer_path(event, question), params: { guest_id: guest.id }, method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
-                      </div>
-                      <div class="nomi-table-question-answer p-1"></div>
-                    <% end %>
+              <%# アンケート回答表 %>
+              <div class="nomi-overflow-x">
+                <div class="d-flex">
+                  <% guests.each do |guest| %>
+                  <% question_answer = question.question_answer(guest) %>
+                    <div>
+                      <%= turbo_frame_tag "question_answer_#{guest.id}" do %>
+                        <% if question_answer %>
+                          <div class="nomi-table-question-guest">
+                            <%= button_to guest.name, edit_event_question_question_answer_path(event, question, question_answer), params: { guest_id: guest.id }, method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
+                          </div>
+                          <div class="nomi-table-question-answer p-1">
+                            <%= safe_join(question_answer.answer.split("\n"), tag(:br)) %>
+                          </div>
+                        <% else %>
+                          <div class="nomi-table-question-guest">
+                            <%= button_to guest.name, new_event_question_question_answer_path(event, question), params: { guest_id: guest.id }, method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
+                          </div>
+                          <div class="nomi-table-question-answer p-1"></div>
+                        <% end %>
+                      <% end %>
+                    </div>
                   <% end %>
                 </div>
-              <% end %>
-            </div>
-          </div>
-          <%# /アンケート回答表 %>
+              </div>
+              <%# /アンケート回答表 %>
 
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
