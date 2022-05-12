@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_12_055816) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_12_061214) do
   create_table "attendances", charset: "utf8", force: :cascade do |t|
     t.bigint "possible_date_id", null: false
     t.bigint "guest_id", null: false
@@ -85,6 +85,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_12_055816) do
     t.index ["event_id"], name: "index_possible_dates_on_event_id"
   end
 
+  create_table "question_answers", charset: "utf8", force: :cascade do |t|
+    t.bigint "guest_id", null: false
+    t.bigint "question_id", null: false
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_question_answers_on_guest_id"
+    t.index ["question_id"], name: "index_question_answers_on_question_id"
+  end
+
   create_table "questions", charset: "utf8", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.string "title", null: false
@@ -119,5 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_12_055816) do
   add_foreign_key "notices", "events"
   add_foreign_key "places", "events"
   add_foreign_key "possible_dates", "events"
+  add_foreign_key "question_answers", "guests"
+  add_foreign_key "question_answers", "questions"
   add_foreign_key "questions", "events"
 end
