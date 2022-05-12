@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "question_answer_#{guest.id}" do %>
+  <div class="nomi-table-question-guest">
+    <%= button_to guest.name, event_path(event), method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
+  </div>
+  <%= form_with model: [event, question, question_answer] do |f| %>
+    <div class="nomi-table-question-answer d-flex flex-column align-items-center p-1">
+      <%= f.text_area :answer, class: 'form-control' %>
+      <%= f.hidden_field :guest_id, value: guest.id %>
+      <%= f.submit '入力', class: 'btn btn-sm btn-dark mt-1 mx-1 px-1' %>
+    </div>
+  <% end %>
+<% end %>

@@ -20,7 +20,7 @@ class PossibleDatesController < ApplicationController
     possible_date = PossibleDate.find(params[:id])
     possible_date.destroy
     respond_to do |format|
-      format.html { redirect_to event_path(@event) }
+      format.html { redirect_to event_path(@event), status: :see_other }
     end
   end
 
