@@ -25,6 +25,34 @@
             </div>
           </div>
           <div class="p-3"><%= safe_join(question.content.split("\n"), tag(:br)) %></div>
+
+          <%# アンケート回答表 %>
+          <div class="nomi-overflow-x">
+            <div class="d-flex">
+              <% guests.each do |guest| %>
+              <% question_answer = question.question_answer(guest) %>
+                <div>
+                  <%= turbo_frame_tag "question_answer_#{guest.id}" do %>
+                    <% if question_answer %>
+                      <div class="nomi-table-question-guest">
+                        <%= button_to guest.name, edit_event_question_question_answer_path(event, question, question_answer), params: { guest_id: guest.id }, method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
+                      </div>
+                      <div class="nomi-table-question-answer p-1">
+                        <%= safe_join(question_answer.answer.split("\n"), tag(:br)) %>
+                      </div>
+                    <% else %>
+                      <div class="nomi-table-question-guest">
+                        <%= button_to guest.name, new_event_question_question_answer_path(event, question), params: { guest_id: guest.id }, method: :get, class: 'btn btn-sm btn-dark mx-1 px-1' %>
+                      </div>
+                      <div class="nomi-table-question-answer p-1"></div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <%# /アンケート回答表 %>
+
         </div>
       <% end %>
     <% end %>

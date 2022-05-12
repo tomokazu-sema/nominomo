@@ -134,3 +134,27 @@ main {
   min-width: 80px;
   max-width: 80px;
 }
+
+.nomi-table-question-cell {
+  @extend .d-flex;
+  @extend .justify-content-center;
+  @extend .align-items-center;
+  @extend .border;
+  min-height: 60px;
+}
+
+.nomi-table-question-guest {
+  @extend .nomi-table-question-cell;
+  @extend .text-wrap;
+  min-width: 100px;
+  max-width: 100px;
+}
+
+.nomi-table-question-answer {
+  @extend .border;
+  @extend .text-wrap;
+  height: calc(100% - 60px);
+  min-height: 60px;
+  min-width: 100px;
+  max-width: 100px;
+}
