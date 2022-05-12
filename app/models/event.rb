@@ -22,4 +22,5 @@ class Event < ApplicationRecord
   has_many   :possible_dates, dependent: :destroy
   has_many   :guests,         dependent: :destroy
   has_one    :notice,         dependent: :destroy
+  has_many   :questions,      dependent: :destroy
 end
