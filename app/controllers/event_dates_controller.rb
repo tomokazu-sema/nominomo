@@ -12,7 +12,7 @@ class EventDatesController < ApplicationController
     event_date = EventDate.find(params[:id])
     event_date.destroy
     respond_to do |format|
-      format.html { redirect_to event_path(@event) }
+      format.html { redirect_to event_path(@event), status: :see_other }
     end
   end
 
