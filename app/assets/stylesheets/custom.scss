@@ -158,3 +158,13 @@ main {
   min-width: 100px;
   max-width: 100px;
 }
+
+.nomi-table-payment {
+  @extend .d-flex;
+  @extend .justify-content-center;
+  @extend .align-items-center;
+  @extend .border;
+  min-height: 60px;
+  min-width: 100px;
+  max-width: 100px;
+}
