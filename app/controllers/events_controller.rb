@@ -24,6 +24,7 @@ class EventsController < ApplicationController
     @event_date = @event.event_date
     @guests = @event.guests.order(created_at: :ASC)
     @notice = @event.notice
+    @questions = @event.questions.order(created_at: :ASC)
   end
 
   def edit; end

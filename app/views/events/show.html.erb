@@ -43,4 +43,11 @@
     <% end %>
   </div>
 
+   <%# アンケート ///////////////////////////////////////////////// %>
+  <div class="pt-4 mb-4">
+    <%= turbo_frame_tag 'question' do %>
+      <%= render partial: 'question', locals: { event: @event, questions: @questions } %>
+    <% end %>
+  </div>
+
 </div>

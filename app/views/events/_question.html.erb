@@ -1,0 +1,32 @@
+<div class="row h-100 justify-content-center">
+  <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+    <div class="ms-0 my-1 nomi-subhead-box"></div>
+    <div class="ms-2 mb-0 h5">アンケート</div>
+    <div class="mb-1 ms-auto d-flex">
+      <% if host_user?(event) %>
+        <%= button_to '作成', new_event_question_path(event), method: :get, class: 'btn btn-sm btn-secondary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row h-100 justify-content-center">
+  <div class="col-8 mt-2 ps-0 nomi-event-width">
+    <% if questions.empty? %>
+      <div class="ms-4">アンケートはありません</div>
+    <% else %>
+      <% questions.each do |question| %>
+        <div class="ms-4 my-3 p-2 border">
+          <div class="border-bottom d-flex">
+            <div class="ms-2 mb-0 h3"><%= question.title %></div>
+            <div class="mb-1 ms-auto d-flex">
+              <%= button_to '編集', edit_event_question_path(event, question), method: :get, class: 'btn btn-sm btn-secondary' %>
+              <%= button_to '削除', event_question_path(event, question), form: { data: { turbo_confirm: "本当に削除しますか？" } }, method: :delete, class: 'ms-1 btn btn-sm btn-secondary' %>
+            </div>
+          </div>
+          <div class="p-3"><%= safe_join(question.content.split("\n"), tag(:br)) %></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
