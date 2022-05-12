@@ -1,8 +1,8 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_event
-  before_action :set_guest, only: [:new, :edit]
-  before_action :set_question, only: [:new, :edit]
-  before_action :set_question_answer, only: [:edit, :update]
+  before_action :set_guest, only: %i[new edit]
+  before_action :set_question, only: %i[new edit]
+  before_action :set_question_answer, only: %i[edit update]
 
   def new
     @question_answer = QuestionAnswer.new
@@ -19,8 +19,7 @@ class QuestionAnswersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     respond_to do |format|
