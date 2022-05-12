@@ -50,6 +50,7 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:guest_id, :price, :status_id).merge(payment_management_id: params[:payment_management_id])
+    params.require(:payment).permit(:guest_id, :price,
+                                    :status_id).merge(payment_management_id: params[:payment_management_id])
   end
 end

@@ -1,7 +1,7 @@
 class Status < ActiveHash::Base
   self.data = [
     { id: 1, status: '未' },
-    { id: 2, status: '済' },
+    { id: 2, status: '済' }
   ]
 
   include ActiveHash::Associations
