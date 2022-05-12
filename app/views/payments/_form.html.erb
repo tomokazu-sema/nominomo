@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "payment_#{guest.id}" do %>
+  <div class="nomi-table-payment bg-nomi-main">
+    <%= button_to guest.name, event_path(event), method: :get, class: 'btn btn-sm btn-secondary mx-1 px-1' %>
+  </div>
+  <%= form_with model: [event, payment_management, payment] do |f| %>
+    <div class="nomi-table-payment p-1 bg-nomi-main">
+      <%= f.text_field :price, class: 'form-control text-center' %>
+    </div>
+    <div class="nomi-table-payment p-1 bg-nomi-main">
+      <%= f.collection_select(:status_id, Status.all, :id, :status, {}, { class: 'form-control text-center' }) %>
+    </div>
+    <div class="d-flex flex-column align-items-center">
+      <%= f.hidden_field :guest_id, value: guest.id %>
+      <%= f.submit '確定', class: 'btn btn-sm btn-secondary mt-1 mx-1 px-1' %>
+    </div>
+  <% end %>
+<% end %>

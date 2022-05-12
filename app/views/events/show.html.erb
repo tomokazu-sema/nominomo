@@ -33,7 +33,10 @@
     <%= render partial: 'date_guest_table', locals: { event: @event, event_date: @event_date, possible_dates: @possible_dates, guests: @guests } %>
       
     <%# アンケート ///////////////////////////////////////////////// %>
-     <%= render partial: 'question', locals: { event: @event, guests: @guests, questions: @questions } %>  
+    <%= render partial: 'question', locals: { event: @event, guests: @guests, questions: @questions } %>  
+
+    <%# 会費管理 ///////////////////////////////////////////////// %>
+    <%= render partial: 'payment_management', locals: { event: @event, guests: @guests, payment_management: @payment_management } %>  
 
   <% end %>
 
