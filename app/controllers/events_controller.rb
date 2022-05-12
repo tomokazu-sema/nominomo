@@ -20,11 +20,12 @@ class EventsController < ApplicationController
   def show
     move_to_new_guest if @event.password_digest
     @place = @event.place
-    @possible_dates = @event.possible_dates.includes(:attendances).order(datetime: :ASC)
-    @event_date = @event.event_date
-    @guests = @event.guests.order(created_at: :ASC)
-    @notice = @event.notice
-    @questions = @event.questions.includes(:question_answers).order(created_at: :ASC)
+    @possible_dates     = @event.possible_dates.includes(:attendances).order(datetime: :ASC)
+    @event_date         = @event.event_date
+    @guests             = @event.guests.order(created_at: :ASC)
+    @notice             = @event.notice
+    @questions          = @event.questions.includes(:question_answers).order(created_at: :ASC)
+    @payment_management = @event.payment_management
   end
 
   def edit; end
