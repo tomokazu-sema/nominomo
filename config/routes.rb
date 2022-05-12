@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     resources :questions, only: %i[new create edit update destroy] do
       resources :question_answers, only: %i[new create edit update]
     end
+    resources :payment_managements, only: %i[create destroy] do
+      resources :payments, only: %i[new create edit update]
+    end
   end
   get  '/events/:id/sign_in', to: 'events#new_guest'
   post '/events/:id/sign_in', to: 'events#create_guest'
