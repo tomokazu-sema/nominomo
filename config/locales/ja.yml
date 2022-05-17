@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: ユーザー名
+      event:
+        title: イベント名
+      guest:
+        name: 名前
+      place:
+        place: 開催場所
+      possible_date:
+        datetime: 候補日
+      question:
+        title: アンケート題名
