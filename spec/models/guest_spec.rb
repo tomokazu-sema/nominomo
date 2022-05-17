@@ -20,12 +20,12 @@ RSpec.describe Guest, type: :model do
       it 'eventに紐付いていないと作成できない' do
         @guest.event = nil
         @guest.valid?
-        expect(@guest.errors.full_messages).to include('Event must exist')
+        expect(@guest.errors.full_messages).to include('Eventを入力してください')
       end
       it 'nameが空では作成できない' do
         @guest.name = ''
         @guest.valid?
-        expect(@guest.errors.full_messages).to include("Name can't be blank")
+        expect(@guest.errors.full_messages).to include('名前を入力してください')
       end
     end
   end

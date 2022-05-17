@@ -16,12 +16,12 @@ RSpec.describe PossibleDate, type: :model do
       it 'eventに紐付いていないと作成できない' do
         @possible_date.event = nil
         @possible_date.valid?
-        expect(@possible_date.errors.full_messages).to include('Event must exist')
+        expect(@possible_date.errors.full_messages).to include('Eventを入力してください')
       end
       it 'datetimeが空では作成できない' do
         @possible_date.datetime = ''
         @possible_date.valid?
-        expect(@possible_date.errors.full_messages).to include("Datetime can't be blank")
+        expect(@possible_date.errors.full_messages).to include('候補日を入力してください')
       end
     end
   end

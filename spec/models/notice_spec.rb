@@ -20,7 +20,7 @@ RSpec.describe Notice, type: :model do
       it 'eventに紐付いていないと作成できない' do
         @notice.event = nil
         @notice.valid?
-        expect(@notice.errors.full_messages).to include('Event must exist')
+        expect(@notice.errors.full_messages).to include('Eventを入力してください')
       end
     end
   end

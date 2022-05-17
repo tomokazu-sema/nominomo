@@ -16,7 +16,7 @@ RSpec.describe PaymentManagement, type: :model do
       it 'eventに紐付いていないと作成できない' do
         @payment_management.event = nil
         @payment_management.valid?
-        expect(@payment_management.errors.full_messages).to include('Event must exist')
+        expect(@payment_management.errors.full_messages).to include('Eventを入力してください')
       end
     end
   end
