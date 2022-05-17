@@ -16,7 +16,7 @@ RSpec.describe Host, type: :model do
       it 'eventが存在しない場合は作成できない' do
         @host.event = nil
         @host.valid?
-        expect(@host.errors.full_messages).to include('Event must exist')
+        expect(@host.errors.full_messages).to include('Eventを入力してください')
       end
     end
   end

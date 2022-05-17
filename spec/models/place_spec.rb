@@ -24,12 +24,12 @@ RSpec.describe Place, type: :model do
       it 'eventに紐付いていないと作成できない' do
         @place.event = nil
         @place.valid?
-        expect(@place.errors.full_messages).to include('Event must exist')
+        expect(@place.errors.full_messages).to include('Eventを入力してください')
       end
       it 'placceが空では作成できない' do
         @place.place = ''
         @place.valid?
-        expect(@place.errors.full_messages).to include("Place can't be blank")
+        expect(@place.errors.full_messages).to include('開催場所を入力してください')
       end
     end
   end

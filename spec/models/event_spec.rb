@@ -24,7 +24,7 @@ RSpec.describe Event, type: :model do
       it 'titleが空では作成できない' do
         @event.title = ''
         @event.valid?
-        expect(@event.errors.full_messages).to include("Title can't be blank")
+        expect(@event.errors.full_messages).to include('イベント名を入力してください')
       end
     end
   end

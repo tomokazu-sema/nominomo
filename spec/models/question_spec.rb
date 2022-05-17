@@ -20,12 +20,12 @@ RSpec.describe Question, type: :model do
       it 'eventに紐付いていないと作成できない' do
         @question.event = nil
         @question.valid?
-        expect(@question.errors.full_messages).to include('Event must exist')
+        expect(@question.errors.full_messages).to include('Eventを入力してください')
       end
       it 'titleが空では作成できない' do
         @question.title = ''
         @question.valid?
-        expect(@question.errors.full_messages).to include("Title can't be blank")
+        expect(@question.errors.full_messages).to include('アンケート題名を入力してください')
       end
     end
   end

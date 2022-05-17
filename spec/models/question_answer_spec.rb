@@ -20,12 +20,12 @@ RSpec.describe QuestionAnswer, type: :model do
       it 'guestに紐付いていないと作成できない' do
         @question_answer.guest = nil
         @question_answer.valid?
-        expect(@question_answer.errors.full_messages).to include('Guest must exist')
+        expect(@question_answer.errors.full_messages).to include('Guestを入力してください')
       end
       it 'questionに紐付いていないと作成できない' do
         @question_answer.question = nil
         @question_answer.valid?
-        expect(@question_answer.errors.full_messages).to include('Question must exist')
+        expect(@question_answer.errors.full_messages).to include('Questionを入力してください')
       end
     end
   end

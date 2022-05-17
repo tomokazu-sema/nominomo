@@ -21,7 +21,9 @@
           <div class="col-8 mt-2 ps-0 nomi-event-width nomi-overflow-x">
             
             <%= form_with model: [event, guest] do |f| %>
-            <%= render "shared/error_messages", resource: f.object %>
+              <div class="ms-4">
+                <%= render "shared/error_messages", resource: f.object %>
+              </div>
 
               <div class="ms-4 d-flex">
                 <div class="nomi-table-date-date">
@@ -92,7 +94,9 @@
           <div class="col-8 mt-2 ps-0 nomi-event-width nomi-overflow-x">
             
             <%= form_with model: [event, guest] do |f| %>
-            <%= render "shared/error_messages", resource: f.object %>
+              <div class="ms-4">
+                <%= render "shared/error_messages", resource: f.object %>
+              </div>
 
               <div class="ms-4 d-flex">
                 <div class="nomi-table-date-date">
