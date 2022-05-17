@@ -1,5 +1,7 @@
 class PossibleDatesController < ApplicationController
   before_action :set_event
+  before_action :move_to_event_show
+  before_action :move_to_event_show_noturbo, only: :new
 
   def new
     @possible_date = PossibleDate.new
@@ -25,10 +27,6 @@ class PossibleDatesController < ApplicationController
   end
 
   private
-
-  def set_event
-    @event = Event.find_by(uid: params[:event_id])
-  end
 
   def possible_date_params
     params.require(:possible_date).permit(:datetime).merge(event_id: @event.id)

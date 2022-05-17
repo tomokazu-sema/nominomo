@@ -1,5 +1,7 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_event
+  before_action :move_to_event_show_noturbo, only: [:new, :edit]
+
   before_action :set_guest, only: %i[new edit]
   before_action :set_question, only: %i[new edit]
   before_action :set_question_answer, only: %i[edit update]
@@ -32,10 +34,6 @@ class QuestionAnswersController < ApplicationController
   end
 
   private
-
-  def set_event
-    @event = Event.find_by(uid: params[:event_id])
-  end
 
   def set_guest
     @guest = Guest.find(params[:guest_id])

@@ -1,5 +1,8 @@
 class PlacesController < ApplicationController
   before_action :set_event
+  before_action :move_to_event_show
+  before_action :move_to_event_show_noturbo, only: [:new, :edit]
+
   before_action :set_place, only: %i[edit update]
 
   def new
@@ -30,10 +33,6 @@ class PlacesController < ApplicationController
   end
 
   private
-
-  def set_event
-    @event = Event.find_by(uid: params[:event_id])
-  end
 
   def set_place
     @place = Place.find(params[:id])

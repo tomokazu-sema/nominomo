@@ -1,5 +1,7 @@
 class GuestsController < ApplicationController
   before_action :set_event
+  before_action :move_to_event_show_noturbo, only: [:new, :edit]
+
   before_action :set_event_date, only: %i[new edit]
   before_action :set_possible_dates, only: %i[new edit]
   before_action :set_guest, only: %i[edit update]
@@ -42,10 +44,6 @@ class GuestsController < ApplicationController
   end
 
   private
-
-  def set_event
-    @event = Event.find_by(uid: params[:event_id])
-  end
 
   def set_event_date
     @event_date = @event.event_date

@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
-  include EventsHelper
   before_action :set_event, only: %i[show edit update new_guest create_guest]
-
+  before_action :move_to_event_show, only: [:edit, :update, :destroy]
+  before_action :move_to_event_show_noturbo, only: :edit
+ 
   def new
     @event = Event.new
   end

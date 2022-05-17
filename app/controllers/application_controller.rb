@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   before_action :basic_auth
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :configure_account_update_parameters, if: :devise_controller?
@@ -42,5 +43,22 @@ class ApplicationController < ActionController::Base
       # 作成したeventのcookieを渡す
       cookies.signed[key] = { value: [@event.id], expires: 1.year.from_now }
     end
+  end
+
+  # 以下各コントローラ共通処理
+  ### @eventを設定(paramsの都合上event_controllerでは使えないため注意)
+  def set_event
+    @event = Event.find_by(uid: params[:event_id])
+  end
+
+  ### 主催者でない場合に開催日調整ページへ遷移させる
+  def move_to_event_show
+    redirect_to event_path(@event) unless host_user?(@event)
+  end
+
+  ### turbo-frameからのリクエスト出ない場合に開催日調整ページへ遷移させる
+  ### (URL直打ち対策、GETでリクエストするアクションのみに適用)
+  def move_to_event_show_noturbo
+    redirect_to event_path(@event) unless turbo_frame_request?
   end
 end
