@@ -25,7 +25,7 @@ RSpec.describe Question, type: :model do
       it 'titleが空では作成できない' do
         @question.title = ''
         @question.valid?
-        expect(@question.errors.full_messages).to include("アンケート題名を入力してください")
+        expect(@question.errors.full_messages).to include('アンケート題名を入力してください')
       end
     end
   end
