@@ -1,32 +1,48 @@
 <div class="container">
-  <div class="row pt-4 mb-4 pb-2 border-bottom">
-    <h1 class="h3 text-center">日程調整の作成</h1>
+  <div class="row h-100 justify-content-center">
+    <div class="row h-100 mt-3 mb-2 pb-2 justify-content-center border-bottom">
+      <div class="col text-center h3">日程調整の作成</div>
+    </div>
   </div>
 
-  <%= form_with model:@event, data: { turbo: :false, turbo_method: :post } do |f| %>
-    <div class="row mb-2 pb-4 justify-content-center">
-      <div class="col-4 nomi-form-width">
+  <%# ご案内 %>
+  <% unless user_signed_in? %>
+    <div class="pt-4 pb-4">
+      <div class="row h-100 justify-content-center">
+        <div class="col-8 mt-2 ps-0 d-flex align-items-center border-bottom nomi-event-width">
+          <div class="ms-0 my-1 nomi-subhead-box"></div>
+          <div class="ms-2 mb-0 h5">ご案内</div>
+        </div>
+      </div>
+
+      <div class="row h-100 justify-content-center">
+        <div class="col-8 mt-2 py-2 ps-0 nomi-event-width">
+            <div class="ms-4 mb-2 h5">現在ログインしておりません。</div>
+            <div class="ms-4 mb-0">ログインしなくても日程調整をご利用いただけますが、</div>
+            <div class="ms-4 mb-0">別のブラウザ、端末からのアクセスにはURLの控えが必要になります。</div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%# /ご案内 %>
+
+  <%= form_with model:@event, data: { turbo: :false, turbo_method: :post } do |f|  %>
+    <div class="row h-100 justify-content-center">
+      <div class="col-8 mt-2 pt-2 pb-4 ps-0 d-flex flex-column align-items-center nomi-event-width">
+        
         <%= render "shared/error_messages", resource: f.object %>
-      </div>
-    </div>
-    
-    <div class="row mb-2 pb-4 justify-content-center">
-      <div class="col-4 nomi-form-width">
-        <%= f.label :title, 'イベント名' %>
-        <%= f.text_field :title, class: 'form-control' %>
-      </div>
-    </div>
-    
-    <div class="row mb-2 pb-4 justify-content-center">
-      <div class="col-4 nomi-form-width">
-        <%= f.label :password, '閲覧パスワード (希望する場合のみ入力)' %>
-        <%= f.text_field :password, class: 'form-control' %>
-      </div>
-    </div>
-    
-    <div class="row mb-4 pb-2 justify-content-center">
-      <div class="col-2 nomi-form-btn-width">
-        <%= f.submit '作成', class: 'w-100 btn btn-lg btn-secondary' %>
+
+        <div class="w-50 mt-2">
+          <%= f.label :title, 'イベント名' %>
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
+
+        <div class="w-50 mt-2">
+          <%= f.label :password, '閲覧パスワード (希望する場合のみ入力)' %>
+          <%= f.text_field :password, class: 'form-control' %>
+        </div>
+      
+        <%= f.submit '作成', class: 'w-25 mt-4 btn btn-lg btn-secondary' %>
       </div>
     </div>
   <% end %>
