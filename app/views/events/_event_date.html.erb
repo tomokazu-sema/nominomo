@@ -16,7 +16,12 @@
       <% if event_date %>
         <div class="ms-4 mb-0 h5"><%= I18n.l event_date.possible_date.datetime, format: :full_date %></div>
       <% else %>
-        <div class="ms-4 mb-0 h5">調整中</div>
+        <div>
+          <div class="ms-4 mb-0 h5">調整中</div>
+          <% if host_user?(event) %>
+            <div class="ms-4 mt-2 mb-0">日程調整から確定してください</div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
