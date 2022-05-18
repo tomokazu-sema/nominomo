@@ -10,7 +10,8 @@ nominomo
 <br>
 
 # URL
-http://nominomo.net
+http://nominomo.net<br>
+※ 追加機能実装のため予告なく停止する場合があります
 <br>
 <br>
 
@@ -31,8 +32,8 @@ http://nominomo.net
 ユーザー登録を行わない場合以下の制限がある。
 
 - ユーザーページ(日程調整一覧)の利用不可
-- 日程調整の保存期限が無期限にならない
 - 別のブラウザ、端末から主催者(幹事)としてアクセスする場合、主催者用URLが必要になる
+- (※実装予定)日程調整の保存期限が無期限にならない
 
 ## 日程調整
 1. Topページもしくはユーザーページから日程調整を作成する
@@ -56,16 +57,15 @@ https://docs.google.com/spreadsheets/d/1-s4CTwQhnfxOJ7d44t-skg8lLZg4GL5phUQrc5jF
 <br>
 
 # 実装した機能についての画像やGIFおよびその説明
-準備中
+編集中
 <br>
 <br>
 
 # 実装予定の機能
-日程調整機能<br>
-アンケート機能<br>
 乗り合わせ調整機能<br>
-会費管理機能<br>
 会計報告機能<br>
+ログインせずに作成した調整ページを期限で削除<br>
+各種テストの強化、異常値対応の強化<br>
 <br>
 <br>
 
@@ -88,9 +88,30 @@ Docker 4.7.1<br>
 <br>
 
 # ローカルでの動作方法
-準備中
+以下のコマンドを順に実行。
+% git clone https://github.com/tomokazu-sema/nominomo<br>
+% cd nominomo<br>
+% bundle install<br>
+% yarn install <br>
+% yarn build:css<br>
+% rails db:create db:migrate<br>
+※ /config/database.ymlを修正ください (password, host)<br>
 <br>
 <br>
 
 # 工夫したポイント
-準備中
+## ログインしなくても使用可能とする
+飲み会の日程調整という理由だけで、全てのユーザーにユーザー登録してもらうことは難しいため、ユーザー登録なしでも利用できる様にした。<br>
+具体的には、
+
+- URLをランダム文字列として認証の代わりに
+- 閲覧パスワードを任意で設定可能
+- Cookieを利用したページ利用者の判別
+
+を実装した。<br>
+<br>
+
+## ネイティブアプリの操作性を重視
+メインコンテンツとなる日程調整のページでは、SPAを採用しユーザーが直感的に操作できる構成とした。<br>
+Rails7に標準で採用されているTurboを利用し、開発の省力化、コードのメンテナンス性を向上させた。<br>
+<br>
