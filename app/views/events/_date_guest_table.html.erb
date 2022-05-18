@@ -89,7 +89,7 @@
           <% possible_dates.each do |possible_date| %>
             <div class="ms-4 d-flex">
               <div class="nomi-table-date-date h5 my-0">
-                <%= possible_date.datetime.strftime("%m/%d %H:%M") %>
+                <%= I18n.l possible_date.datetime, format: :full_date %>
               </div>
               <div class="nomi-table-date-guestnum mb-0 h5">
                 <%= possible_date.count_attendance_answer(2) %>

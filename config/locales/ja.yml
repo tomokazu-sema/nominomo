@@ -13,3 +13,6 @@ ja:
         datetime: 候補日
       question:
         title: アンケート題名
+  time:
+    formats:
+        full_date: "%m/%d(%a) %H:%M"      

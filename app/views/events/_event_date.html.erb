@@ -14,7 +14,7 @@
   <div class="row h-100 justify-content-center">
     <div class="col-8 mt-2 ps-0 d-flex align-items-center nomi-event-width">
       <% if event_date %>
-        <div class="ms-4 mb-0 h5"><%= event_date.possible_date.datetime.strftime("%m/%d %H:%M") %></div>
+        <div class="ms-4 mb-0 h5"><%= I18n.l event_date.possible_date.datetime, format: :full_date %></div>
       <% else %>
         <div class="ms-4 mb-0 h5">未調整</div>
       <% end %>
