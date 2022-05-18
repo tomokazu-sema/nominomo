@@ -20,6 +20,7 @@ http://nominomo.net<br>
 - Basic認証Password: study37687f
 - メールアドレス: testuser1@test
 - パスワード: pass1234
+- 新プロジェクト壮行会: pass
 <br>
 <br>
 
@@ -57,7 +58,10 @@ https://docs.google.com/spreadsheets/d/1-s4CTwQhnfxOJ7d44t-skg8lLZg4GL5phUQrc5jF
 <br>
 
 # 実装した機能についての画像やGIFおよびその説明
-編集中
+![日程調整ページ1](./SS01.png)
+![日程調整ページ2](./SS02.png)
+![日程調整ページ3](./SS03.gif)
+開催日は日程調整から確定することで表示される
 <br>
 <br>
 
