@@ -54,7 +54,11 @@ class EventsController < ApplicationController
       set_event_cookie(:guest)
       redirect_to event_path(@event)
     else
-      flash.now[:alert] = '閲覧パスワードを入力してください'
+      if password == ''
+        flash.now[:alert] = '閲覧パスワードを入力してください'
+      else
+        flash.now[:alert] = '閲覧パスワードが間違っています'
+      end
       render :new_guest, status: :unprocessable_entity
     end
   end
