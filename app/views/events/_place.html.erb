@@ -22,7 +22,7 @@
           <% if place.url == '' %>
             <div class="ms-4 mb-0 h5"><%= place.place %></div>
           <% else %>
-            <%= link_to place.place, place.url, class: 'ms-4 mb-0 h5' %>
+            <%= link_to place.place, place.url, target: :_blank, rel: "noopener noreferrer", class: 'ms-4 mb-0 h5' %>
           <% end %>
         <% else %>
           <div class="ms-4 mb-0 h5">未入力</div>
